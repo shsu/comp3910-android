@@ -2,7 +2,9 @@ package ca.bcit.turnip;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 
 public class FirstActivity extends Activity {
 
@@ -19,4 +21,16 @@ public class FirstActivity extends Activity {
 		return true;
 	}
 
+	public void sendMessage(View view) {
+		Intent intent = new Intent(this, SecondActivity.class);
+	
+		startActivity(intent);
+	}
+	
+	public void sendNewUser(View view) {
+		Intent intent = new Intent(this, NewUserActivity.class);
+		
+		startActivity(intent);
+	}
+	
 }

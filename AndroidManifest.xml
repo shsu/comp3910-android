@@ -22,6 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="ca.bcit.turnip.SecondActivity"
+            android:label="@string/title_activity_second"
+            android:parentActivityName="ca.bcit.turnip.FirstActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.bcit.turnip.FirstActivity" />
+        </activity>
+        <activity
+            android:name="ca.bcit.turnip.NewUserActivity"
+            android:label="@string/title_activity_new_user" 
+            android:parentActivityName="ca.bcit.turnip.FirstActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.bcit.turnip.FirstActivity" />
+        </activity>
     </application>
 
 </manifest>
