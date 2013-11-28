@@ -40,7 +40,19 @@
         </activity>
         <activity
             android:name="ca.bcit.turnip.RegisterActivity"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register"
+            android:parentActivityName="ca.bcit.turnip.NewUserActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.bcit.turnip.NewUserActivity" />
+        </activity>
+        <activity
+            android:name="ca.bcit.turnip.QuizActivity"
+            android:label="@string/title_activity_quiz" >
+        </activity>
+        <activity
+            android:name="ca.bcit.turnip.ScoreActivity"
+            android:label="@string/title_activity_score" >
         </activity>
     </application>
 

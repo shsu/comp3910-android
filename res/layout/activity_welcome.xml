@@ -51,7 +51,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textView_quizzes_taken"
         android:layout_marginBottom="30dp"
-        android:text="@string/start_next_quiz" />
+        android:text="@string/start_next_quiz"
+        android:onClick="sendQuiz" />
 
     <TextView
         android:id="@+id/textView1"
@@ -72,6 +73,15 @@
         android:layout_marginTop="15dp"
         android:text="@string/user_average_score"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
+
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_start_next_quiz"
+        android:layout_alignBottom="@+id/button_start_next_quiz"
+        android:layout_alignLeft="@+id/textView_user_average_score"
+        android:text="@string/logout"
+        android:onClick="sendLogout" />
     
 </RelativeLayout>

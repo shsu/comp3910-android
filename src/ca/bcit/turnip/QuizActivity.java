@@ -6,33 +6,25 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
-public class WelcomeActivity extends Activity {
+public class QuizActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_welcome);
+		setContentView(R.layout.activity_quiz);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.second, menu);
+		getMenuInflater().inflate(R.menu.quiz, menu);
 		return true;
 	}
 	
-	public void sendQuiz(View view) {
-		Intent intent = new Intent(this, QuizActivity.class);
+	public void sendScore(View view) {
+		Intent intent = new Intent(this, ScoreActivity.class);
 		
 		startActivity(intent);
 	}
 
-	public void sendLogout(View view) {
-		// insert Logout credentials deletion procedures
-		
-		Intent intent = new Intent(this, LoginActivity.class);
-		
-		startActivity(intent);
-	}
-	
 }

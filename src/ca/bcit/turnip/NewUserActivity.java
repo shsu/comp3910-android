@@ -16,10 +16,10 @@ public class NewUserActivity extends Activity {
 	EditText et_studentId;
 	
 	
-	String username;
+	public static String username;
 	String password;
-	String firstName;
-	String lastName;
+	public static String firstName;
+	public static String lastName;
 	String studentId;
 	
 	
@@ -43,9 +43,17 @@ public class NewUserActivity extends Activity {
 		et_lastName = (EditText) findViewById(R.id.editText_lastName);
 		et_studentId = (EditText) findViewById(R.id.editText_studentId);
 		
-//		Intent intent = new Intent(this, RegisterActivity.class);
+		Intent intent = new Intent(this, RegisterActivity.class);
 		
 		// Registration
+		
+		intent.putExtra("username", username);
+		intent.putExtra("password", password);
+		intent.putExtra("firstName", firstName);
+		intent.putExtra("lastName", lastName);
+		intent.putExtra("studentId", studentId);
+		
+		startActivity(intent);
 		
 	}
 

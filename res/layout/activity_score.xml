@@ -6,21 +6,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RegisterActivity" >
+    tools:context=".ScoreActivity" >
 
     <TextView
-        android:id="@+id/textView_register_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register_success" />
+        android:text="@string/your_score" />
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/button_return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/login"
-        android:onClick="sendLogin" />
+        android:layout_marginBottom="52dp"
+        android:text="@string/return_welcome"
+        android:onClick="sendReturn" />
 
 </RelativeLayout>
