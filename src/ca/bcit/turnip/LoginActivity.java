@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
-public class FirstActivity extends Activity {
+public class LoginActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_first);
+		setContentView(R.layout.activity_login);
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class FirstActivity extends Activity {
 	}
 
 	public void sendMessage(View view) {
-		Intent intent = new Intent(this, SecondActivity.class);
+		Intent intent = new Intent(this, WelcomeActivity.class);
 	
 		startActivity(intent);
 	}

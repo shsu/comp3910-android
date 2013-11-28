@@ -9,8 +9,113 @@
     tools:context=".NewUserActivity" >
 
     <TextView
+        android:id="@+id/textView_new_user_registration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New User Screen" />
+        android:text="@string/new_user_registration" />
+       
+
+    <EditText
+        android:id="@+id/editText_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_username"
+        android:layout_below="@+id/textView_username"
+        android:ems="10"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editText_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_password"
+        android:layout_below="@+id/textView_password"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/textView_firstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText_password"
+        android:layout_below="@+id/editText_password"
+        android:layout_marginTop="18dp"
+        android:text="@string/firstName"
+         />
+
+    <TextView
+        android:id="@+id/textView_lastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView_firstName"
+        android:layout_below="@+id/editText_firstName"
+        android:layout_marginTop="16dp"
+        android:text="@string/lastName"
+        />
+
+    <EditText
+        android:id="@+id/editText_firstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_firstName"
+        android:layout_below="@+id/textView_firstName"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editText_lastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_lastName"
+        android:layout_below="@+id/textView_lastName"
+        android:ems="10"
+        android:inputType="textPersonName" >
+
+        
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText_studentId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText_firstName"
+        android:layout_below="@+id/textView_studentNumber"
+        android:ems="10" 
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textView_studentNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText_lastName"
+        android:layout_below="@+id/editText_lastName"
+        android:layout_marginTop="20dp"
+        android:text="@string/studentNumber" />
+
+    <TextView
+        android:id="@+id/textView_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText_username"
+        android:layout_below="@+id/editText_username"
+        android:layout_marginTop="19dp"
+        android:text="@string/password" />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/register" />
+
+    <TextView
+        android:id="@+id/textView_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_new_user_registration"
+        android:layout_below="@+id/textView_new_user_registration"
+        android:layout_marginTop="16dp"
+        android:text="@string/username" />
 
 </RelativeLayout>

@@ -7,5 +7,24 @@
     <string name="title_activity_second">SecondActivity</string>
     <string name="second">Second Page</string>
     <string name="title_activity_new_user">NewUserActivity</string>
-
+    <string name="enter">Enter</string>
+	<string name="username">User Name</string>
+	<string name="password">Password</string>
+	<string name="new_user">New User</string>
+	<string name="new_user_registration">New User Registration</string>
+	<string name="studentNumber">Student Number</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="title_activity_newUser">New User Registration</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="quizzes_taken">Quizzes taken / Quizzes remaining</string>
+    <string name="welcome">Welcome</string>
+    <string name="quiz_results">5/14</string>
+    <string name="start_next_quiz">Start next quiz!</string>
+    <string name="average_score">Average Score</string>
+    <string name="user_average_score">75%</string>
+    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="quiz">Quiz</string>
+    <string name="register">Register</string>
+	
 </resources>
