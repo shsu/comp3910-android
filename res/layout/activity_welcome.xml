@@ -8,9 +8,70 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".WelcomeActivity" >
 
+   
+
     <TextView
+        android:id="@+id/textView_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/second" />
+        android:text="@string/welcome" />
 
+    <TextView
+        android:id="@+id/textView_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_welcome"
+        android:layout_below="@+id/textView_welcome"
+        android:text="@string/username"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView_quizzes_taken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_username"
+        android:layout_below="@+id/textView_username"
+        android:layout_marginTop="16dp"
+        android:text="@string/quizzes_taken"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_quiz_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_quizzes_taken"
+        android:layout_below="@+id/textView_quizzes_taken"
+        android:text="@string/quiz_results"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/button_start_next_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView_quizzes_taken"
+        android:layout_marginBottom="30dp"
+        android:text="@string/start_next_quiz" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_quiz_results"
+        android:layout_below="@+id/textView_quiz_results"
+        android:layout_marginTop="16dp"
+        android:text="@string/average_score"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_user_average_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="15dp"
+        android:text="@string/user_average_score"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    
 </RelativeLayout>

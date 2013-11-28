@@ -8,11 +8,11 @@
     <string name="second">Second Page</string>
     <string name="title_activity_new_user">NewUserActivity</string>
     <string name="enter">Enter</string>
-	<string name="username">User Name</string>
-	<string name="password">Password</string>
-	<string name="new_user">New User</string>
-	<string name="new_user_registration">New User Registration</string>
-	<string name="studentNumber">Student Number</string>
+    <string name="username">User Name</string>
+    <string name="password">Password</string>
+    <string name="new_user">New User</string>
+    <string name="new_user_registration">New User Registration</string>
+    <string name="studentId">Student ID</string>
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
     <string name="title_activity_newUser">New User Registration</string>
@@ -26,5 +26,6 @@
     <string name="title_activity_quiz">QuizActivity</string>
     <string name="quiz">Quiz</string>
     <string name="register">Register</string>
-	
+    <string name="title_activity_register">RegisterActivity</string>
+
 </resources>

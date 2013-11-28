@@ -32,11 +32,15 @@
         </activity>
         <activity
             android:name="ca.bcit.turnip.NewUserActivity"
-            android:label="@string/title_activity_new_user" 
+            android:label="@string/title_activity_new_user"
             android:parentActivityName="ca.bcit.turnip.LoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.bcit.turnip.LoginActivity" />
+        </activity>
+        <activity
+            android:name="ca.bcit.turnip.RegisterActivity"
+            android:label="@string/title_activity_register" >
         </activity>
     </application>
 

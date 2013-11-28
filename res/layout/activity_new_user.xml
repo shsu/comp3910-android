@@ -79,18 +79,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editText_firstName"
-        android:layout_below="@+id/textView_studentNumber"
+        android:layout_below="@+id/textView_studentId"
         android:ems="10" 
         android:inputType="text" />
 
     <TextView
-        android:id="@+id/textView_studentNumber"
+        android:id="@+id/textView_studentId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editText_lastName"
         android:layout_below="@+id/editText_lastName"
         android:layout_marginTop="20dp"
-        android:text="@string/studentNumber" />
+        android:text="@string/studentId" />
 
     <TextView
         android:id="@+id/textView_password"
