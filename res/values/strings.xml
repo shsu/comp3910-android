@@ -16,17 +16,17 @@
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
     <string name="title_activity_newUser">New User Registration</string>
-    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_welcome">Welcome Screen</string>
     <string name="quizzes_taken">Quizzes taken / Quizzes remaining</string>
     <string name="welcome">Welcome</string>
     <string name="quiz_results">5/14</string>
     <string name="start_next_quiz">Start next quiz!</string>
     <string name="average_score">Average Score</string>
     <string name="user_average_score">75%</string>
-    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="title_activity_quiz">Quiz</string>
     <string name="quiz">Quiz</string>
     <string name="register">Register</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">User Registration</string>
     <string name="register_success">You have been successfully registered.</string>
     <string name="login">Login</string>
     <string name="quizNumber">Quiz #6</string>
@@ -35,9 +35,10 @@
     <string name="b">b. 1999</string>
     <string name="c">c. 1977</string>
     <string name="d">a. 2001</string>
-    <string name="title_activity_score">ScoreActivity</string>
+    <string name="title_activity_score">Quiz Result</string>
     <string name="submit">Submit</string>
 	<string name="your_score">Your score is 100%</string>
 	<string name="return_welcome">Return</string>
 	<string name="logout">Logout</string>
+	<string name="confirm_password">Confirm Password</string>
 </resources>
