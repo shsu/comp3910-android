@@ -2,15 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".QuizActivity" >
+     >
 
 <RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="440dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".QuizActivity" >
 
     <TextView
         android:id="@+id/textView_quiz_number"
@@ -28,12 +29,17 @@
         android:text="@string/quizQ1"
         />
 
+<RadioGroup
+    android:id="@+id/radioGroup_q1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignLeft="@+id/textView_q1"
+    android:layout_below="@+id/textView_q1" >
+
     <RadioButton
         android:id="@+id/radioButton_a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView_q1"
-        android:layout_below="@+id/textView_q1"
         android:layout_marginTop="18dp"
         android:text="@string/a" />
 
@@ -41,34 +47,30 @@
         android:id="@+id/radioButton_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioButton_a"
-        android:layout_below="@+id/radioButton_a"
         android:text="@string/b" />
 
     <RadioButton
         android:id="@+id/RadioButton_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioButton_b"
-        android:layout_below="@+id/radioButton_b"
         android:text="@string/c" />
 
     <RadioButton
         android:id="@+id/RadioButton_d"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/RadioButton_c"
-        android:layout_below="@+id/RadioButton_c"
+        android:layout_height="wrap_content" 
         android:text="@string/d" />
+</RadioGroup>
 
     <Button
         android:id="@+id/button_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/submit" 
-        android:onClick="sendScore"/>
+     	android:layout_alignRight="@+id/radioGroup_q1"
+    	android:layout_below="@+id/radioGroup_q1"
+        android:onClick="sendScore"
+        android:text="@string/submit"
+         />
 
 </RelativeLayout>
 </ScrollView>

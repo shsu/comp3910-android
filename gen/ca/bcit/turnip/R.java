@@ -24,25 +24,26 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int RadioButton_c=0x7f080015;
-        public static final int RadioButton_d=0x7f080016;
-        public static final int action_settings=0x7f080021;
+        public static final int RadioButton_c=0x7f080016;
+        public static final int RadioButton_d=0x7f080017;
+        public static final int action_settings=0x7f080022;
         public static final int button1=0x7f080004;
         public static final int button2=0x7f080005;
-        public static final int button_login=0x7f080019;
-        public static final int button_logout=0x7f080020;
+        public static final int button_login=0x7f08001a;
+        public static final int button_logout=0x7f080021;
         public static final int button_register=0x7f080010;
-        public static final int button_return=0x7f08001a;
-        public static final int button_start_next_quiz=0x7f08001e;
-        public static final int button_submit=0x7f080017;
+        public static final int button_return=0x7f08001b;
+        public static final int button_start_next_quiz=0x7f08001f;
+        public static final int button_submit=0x7f080018;
         public static final int editText1=0x7f080003;
         public static final int editText_firstName=0x7f08000c;
         public static final int editText_lastName=0x7f08000d;
         public static final int editText_password=0x7f080008;
         public static final int editText_studentId=0x7f08000e;
         public static final int editText_username=0x7f080001;
-        public static final int radioButton_a=0x7f080013;
-        public static final int radioButton_b=0x7f080014;
+        public static final int radioButton_a=0x7f080014;
+        public static final int radioButton_b=0x7f080015;
+        public static final int radioGroup_q1=0x7f080013;
         public static final int textView1=0x7f080000;
         public static final int textView2=0x7f080002;
         public static final int textView_firstName=0x7f08000a;
@@ -51,13 +52,13 @@ public final class R {
         public static final int textView_password=0x7f080009;
         public static final int textView_q1=0x7f080012;
         public static final int textView_quiz_number=0x7f080011;
-        public static final int textView_quiz_results=0x7f08001d;
-        public static final int textView_quizzes_taken=0x7f08001c;
-        public static final int textView_register_msg=0x7f080018;
+        public static final int textView_quiz_results=0x7f08001e;
+        public static final int textView_quizzes_taken=0x7f08001d;
+        public static final int textView_register_msg=0x7f080019;
         public static final int textView_studentId=0x7f08000f;
-        public static final int textView_user_average_score=0x7f08001f;
+        public static final int textView_user_average_score=0x7f080020;
         public static final int textView_username=0x7f080007;
-        public static final int textView_welcome=0x7f08001b;
+        public static final int textView_welcome=0x7f08001c;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;

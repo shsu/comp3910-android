@@ -6,12 +6,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_second">Quiz Main Page</string>
     <string name="second">Second Page</string>
-    <string name="title_activity_new_user">NewUserActivity</string>
+    <string name="title_activity_new_user">New User Registration</string>
     <string name="enter">Enter</string>
     <string name="username">User Name</string>
     <string name="password">Password</string>
     <string name="new_user">New User</string>
-    <string name="new_user_registration">New User Registration</string>
+    <string name="new_user_registration">Please enter the following:</string>
     <string name="studentId">Student ID</string>
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
