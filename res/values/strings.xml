@@ -37,7 +37,8 @@
     <string name="d">a. 2001</string>
     <string name="title_activity_score">Quiz Result</string>
     <string name="submit">Submit</string>
-	<string name="your_score">Your score is 100%</string>
+	<string name="your_score_is">Your score is</string>
+	<string name="quiz_score">100%</string>
 	<string name="return_welcome">Return</string>
 	<string name="logout">Logout</string>
 	<string name="confirm_password">Confirm Password</string>

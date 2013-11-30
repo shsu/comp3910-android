@@ -8,11 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ScoreActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/your_score" />
-
     <Button
         android:id="@+id/button_return"
         android:layout_width="wrap_content"
@@ -22,5 +17,20 @@
         android:layout_marginBottom="52dp"
         android:text="@string/return_welcome"
         android:onClick="sendReturn" />
+
+    <TextView
+        android:id="@+id/textView_your_score_is"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/your_score_is" />
+     <TextView
+        android:id="@+id/textdView_quiz_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_your_score_is"
+        android:layout_centerHorizontal="true"
+        android:text="@string/quiz_score" />
 
 </RelativeLayout>
