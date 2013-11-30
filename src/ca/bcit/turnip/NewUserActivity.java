@@ -74,6 +74,7 @@ public class NewUserActivity extends Activity {
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 HttpResponse response = httpClient.execute(postRequest);
                 responseCode = response.getStatusLine().getStatusCode();
+                httpClient.getConnectionManager().shutdown();
             } catch (Exception e) {
                 e.printStackTrace();
             }
