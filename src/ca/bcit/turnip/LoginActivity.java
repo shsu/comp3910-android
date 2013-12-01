@@ -14,7 +14,6 @@ import com.android.volley.toolbox.Volley;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 
@@ -81,6 +80,7 @@ public class LoginActivity extends Activity {
 					public void onResponse(JSONObject response) {
 						try {
 							token = response.getString("token");
+							Log.i("Auth token in response", token);
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
