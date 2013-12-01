@@ -14,8 +14,10 @@ import com.android.volley.toolbox.Volley;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 public class LoginActivity extends Activity {
 
@@ -39,12 +41,13 @@ public class LoginActivity extends Activity {
 
 	public void sendLogin(View view) {
 
-		// String username = ((Editable)
-		// findViewById(R.id.editText_username_login)).toString();
-		// String password = ((Editable)
-		// findViewById(R.id.editText_password_login)).toString();
+		// Should not be in onCreate because it is blank upon creation.
+		EditText username_field = (EditText) findViewById(R.id.editText_username_login);
+		EditText password_field = (EditText) findViewById(R.id.editText_password_login);
 
-		loginRequest("admin", "admin");
+		loginRequest(username_field.getText().toString(), password_field
+				.getText().toString());
+
 		if (token != null && !token.equals("")) {
 			Intent intent = new Intent(this, WelcomeActivity.class);
 			intent.putExtra("token", token);
@@ -54,7 +57,7 @@ public class LoginActivity extends Activity {
 	}
 
 	public void sendRegister(View view) {
-		Intent intent = new Intent(this, RegisterActivity.class);
+		Intent intent = new Intent(this, NewUserActivity.class);
 		startActivity(intent);
 	}
 
