@@ -19,7 +19,7 @@
         android:text="@string/username" />
 
     <EditText
-        android:id="@+id/editText_username"
+        android:id="@+id/editText_username_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
@@ -35,14 +35,14 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText_username"
-        android:layout_below="@+id/editText_username"
+        android:layout_alignLeft="@+id/editText_username_login"
+        android:layout_below="@+id/editText_username_login"
         android:layout_marginTop="26dp"
         android:text="@string/password"
         />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/editText_password_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
@@ -56,10 +56,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/editText_password_login"
         android:layout_marginRight="40dp"
         android:layout_marginTop="35dp"
-        android:onClick="sendMessage"
+        android:onClick="sendLogin"
         android:text="@string/enter" />
 
     <Button
@@ -68,9 +68,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/button1"
         android:layout_alignBottom="@+id/button1"
-        android:layout_alignLeft="@+id/editText1"
+        android:layout_alignLeft="@+id/editText_password_login"
         android:layout_marginLeft="34dp"
-        android:onClick="sendNewUser"
+        android:onClick="sendRegister"
         android:text="@string/new_user" />
 
 </RelativeLayout>
