@@ -1,24 +1,28 @@
 package ca.bcit.turnip;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import ca.bcit.turnip.domain.QuizUser;
-import android.os.AsyncTask;
+import ca.bcit.turnip.volley.toolbox.MyJsonObjectRequest;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,105 +33,80 @@ import com.android.volley.toolbox.Volley;
 
 public class LoginActivity extends Activity {
 
-    private JSONParser parser = new JSONParser();
+	private RequestQueue volleyRequestQueue;
 
-    RequestQueue queue = Volley.newRequestQueue(this);
-    
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        
-        
-        
-    }
+	private String token;
 
-    public void sendMessage(View view) {
-        Intent intent = new Intent(this, WelcomeActivity.class);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_login);
+		volleyRequestQueue = Volley.newRequestQueue(this);
+	}
 
-        String username = (String) findViewById(R.id.editText_username_login)
-                .toString();
-        String password = (String) findViewById(R.id.editText_password_login)
-                .toString();
+	@Override
+	protected void onStop() {
+		if (volleyRequestQueue != null)
+			volleyRequestQueue.cancelAll(this);
+		super.onStop();
+	}
 
-        QuizUser userLogin = new QuizUser(username, password);
-        new UserLoginTask().execute(userLogin);
+	public void sendLogin(View view) {
 
-        startActivity(intent);
-    }
+		// Should not be in onCreate because it is blank upon creation.
+		EditText username_field = (EditText) findViewById(R.id.editText_username_login);
+		EditText password_field = (EditText) findViewById(R.id.editText_password_login);
 
-    public void sendNewUser(View view) {
-        Intent intent = new Intent(this, NewUserActivity.class);
+		loginRequest(username_field.getText().toString(), password_field
+				.getText().toString());
 
-        startActivity(intent);
-    }
+		if (token != null && !token.equals("")) {
+			Intent intent = new Intent(this, WelcomeActivity.class);
+			intent.putExtra("token", token);
+			startActivity(intent);
+		}
 
-    private class UserLoginTask extends AsyncTask<QuizUser, Void, HttpResponse> {
-        @SuppressWarnings("unchecked")
-        @Override
-        protected HttpResponse doInBackground(QuizUser... users) {
+	}
 
-            String resourceURL = "http://10.0.3.2:8080/a3-server-jhou-shsu/user/";
-            DefaultHttpClient httpClient = new DefaultHttpClient();
+	public void sendRegister(View view) {
+		Intent intent = new Intent(this, Act_Register.class);
+		startActivity(intent);
+	}
 
-            HttpResponse response = null;
+	private void loginRequest(String username, String password) {
 
-            QuizUser user = users[0];
-            JSONObject jsonRequestObject = new JSONObject();
-            jsonRequestObject.put("username", user.getUsername());
-            jsonRequestObject.put("password", user.getPassword());
+		String resourceURL = "http://10.0.2.2:8080/a3-server-jhou-shsu/user/authenticate";
+		JSONObject credentials = new JSONObject();
 
-            HttpPut putRequest = new HttpPut(resourceURL + "authenticate");
-            putRequest.setHeader("Content-Type", "application/json");
+		try {
+			credentials.put("username", username);
+			credentials.put("password", password);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
-            try {
-                putRequest.setEntity(new StringEntity(jsonRequestObject
-                        .toJSONString()));
+		Log.i("login attempt", credentials.toString());
 
-                response = httpClient.execute(putRequest);
-                httpClient.getConnectionManager().shutdown();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return response;
-        }
+		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+				Request.Method.PUT, resourceURL, credentials,
+				new Response.Listener<JSONObject>() {
 
-        @Override
-        protected void onPostExecute(HttpResponse response) {
-            int responseCode;
-            String responseBody = null;
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							token = response.getString("token");
+							Log.i("Auth token in response", token);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
 
-            if (response != null) {
-                responseCode = response.getStatusLine().getStatusCode();
-                ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                try {
-                    responseBody = responseHandler.handleResponse(response);
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+					@Override
+					public void onErrorResponse(VolleyError error) {
 
-                switch (responseCode) {
-                case 200:
-                    Object object = null;
-                    try {
-                        object = parser.parse(responseBody);
-                        JSONObject jsonResponseObject = (JSONObject) object;
-                        String token = (String) jsonResponseObject.get("token");
-                        // STORE THIS TOKEN!
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case 401:// incorrect username/password
-                    break;
-                default:
-                    // unknown error.
-                }
-            }
-
-        }
-    }
-
+					}
+				});
+		volleyRequestQueue.add(jsonObjectRequest);
+	}
 }

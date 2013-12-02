@@ -59,7 +59,7 @@
         android:layout_below="@+id/editText_password_login"
         android:layout_marginRight="40dp"
         android:layout_marginTop="35dp"
-        android:onClick="sendMessage"
+        android:onClick="sendLogin"
         android:text="@string/enter" />
 
     <Button
@@ -70,7 +70,7 @@
         android:layout_alignBottom="@+id/button1"
         android:layout_alignLeft="@+id/editText_password_login"
         android:layout_marginLeft="34dp"
-        android:onClick="sendNewUser"
+        android:onClick="sendRegister"
         android:text="@string/new_user" />
 
 </RelativeLayout>
