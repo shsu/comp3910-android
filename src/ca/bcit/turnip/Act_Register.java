@@ -52,7 +52,7 @@ public class Act_Register extends Activity {
 			newUser.put("lastName", et_lastName.getText().toString());
 			registerRequest(newUser);
 		} catch (JSONException e) {
-			e.printStackTrace();
+			Log.e("sendRegister", e.toString());
 		}
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
@@ -74,7 +74,7 @@ public class Act_Register extends Activity {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						Log.d("registerRequest", error.toString());
+						Log.e("registerRequest", error.toString());
 					}
 				});
 		volleyRequestQueue.add(jsonObjectRequest);

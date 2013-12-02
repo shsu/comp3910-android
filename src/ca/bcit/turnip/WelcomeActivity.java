@@ -37,7 +37,7 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.volleyRequestQueue = MyApp.getRequestQueue();
-		
+
 		token = getIntent().getStringExtra("token");
 		Log.d("Auth token from intent", token);
 
@@ -87,7 +87,7 @@ public class WelcomeActivity extends Activity {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						Log.d("getProfile", error.toString());
+						Log.e("getProfile", error.toString());
 					}
 				}) {
 			@Override
@@ -135,7 +135,7 @@ public class WelcomeActivity extends Activity {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						Log.d("logoutRequest", error.toString());
+						Log.e("logoutRequest", error.toString());
 					}
 				});
 		volleyRequestQueue.add(jsonObjectRequest);

@@ -41,8 +41,8 @@ public class QuizActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		this.volleyRequestQueue = MyApp.getRequestQueue();
 
-		setContentView(R.layout.activity_quiz);
 		token = getIntent().getStringExtra("token");
+		Log.d("Auth token from intent", token);
 
 		getNextQuiz();
 
@@ -54,6 +54,8 @@ public class QuizActivity extends Activity {
 				displayNextQuiz();
 			}
 		}, 500);
+
+		setContentView(R.layout.activity_quiz);
 	}
 
 	@Override
@@ -93,7 +95,7 @@ public class QuizActivity extends Activity {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						Log.d("getNextQuiz", error.toString());
+						Log.e("getNextQuiz", error.toString());
 					}
 				}) {
 			@Override

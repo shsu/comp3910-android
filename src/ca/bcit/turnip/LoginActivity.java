@@ -107,13 +107,14 @@ public class LoginActivity extends Activity {
 			credentials.put("username", username);
 			credentials.put("password", password);
 		} catch (JSONException e) {
-			e.printStackTrace();
+			Log.e("loginRequest", e.toString());
 		}
 
 		Log.d("login attempt", credentials.toString());
 
-		 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
-				resourceURL, credentials, new Response.Listener<JSONObject>() {
+		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+				Request.Method.PUT, resourceURL, credentials,
+				new Response.Listener<JSONObject>() {
 
 					@Override
 					public void onResponse(JSONObject response) {
@@ -122,14 +123,14 @@ public class LoginActivity extends Activity {
 							Log.d("Auth token in response", token);
 
 						} catch (JSONException e) {
-							e.printStackTrace();
+							Log.e("loginRequest", e.toString());
 						}
 					}
 				}, new Response.ErrorListener() {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-
+						Log.e("loginRequest", error.toString());
 					}
 				});
 		volleyRequestQueue.add(jsonObjectRequest);
