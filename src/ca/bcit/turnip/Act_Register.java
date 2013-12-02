@@ -24,7 +24,7 @@ public class Act_Register extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_new_user);
+		setContentView(R.layout.activity_register);
 		volleyRequestQueue = Volley.newRequestQueue(this);
 	}
 
