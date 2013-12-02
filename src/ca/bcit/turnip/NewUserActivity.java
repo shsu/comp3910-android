@@ -53,7 +53,7 @@ public class NewUserActivity extends Activity {
         @Override
         protected Integer doInBackground(QuizUser... users) {
 
-            String resourceURL = "http://localhost:8080/a3-server-jhou-shsu/user/";
+            String resourceURL = "http://10.0.3.2:8080/a3-server-jhou-shsu/user/";
 
             Integer responseCode = 200;
 

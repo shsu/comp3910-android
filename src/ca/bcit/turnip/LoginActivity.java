@@ -20,22 +20,34 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 public class LoginActivity extends Activity {
 
     private JSONParser parser = new JSONParser();
 
+    RequestQueue queue = Volley.newRequestQueue(this);
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        
+        
+        
     }
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this, WelcomeActivity.class);
 
-        String username = (String) findViewById(R.id.editText_username)
+        String username = (String) findViewById(R.id.editText_username_login)
                 .toString();
-        String password = (String) findViewById(R.id.editText_password)
+        String password = (String) findViewById(R.id.editText_password_login)
                 .toString();
 
         QuizUser userLogin = new QuizUser(username, password);
@@ -55,7 +67,7 @@ public class LoginActivity extends Activity {
         @Override
         protected HttpResponse doInBackground(QuizUser... users) {
 
-            String resourceURL = "http://localhost:8080/a3-server-jhou-shsu/user/";
+            String resourceURL = "http://10.0.3.2:8080/a3-server-jhou-shsu/user/";
             DefaultHttpClient httpClient = new DefaultHttpClient();
 
             HttpResponse response = null;
@@ -66,7 +78,7 @@ public class LoginActivity extends Activity {
             jsonRequestObject.put("password", user.getPassword());
 
             HttpPut putRequest = new HttpPut(resourceURL + "authenticate");
-            putRequest.setHeader("content-type", "application/json");
+            putRequest.setHeader("Content-Type", "application/json");
 
             try {
                 putRequest.setEntity(new StringEntity(jsonRequestObject
