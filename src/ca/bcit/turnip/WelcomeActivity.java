@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -33,6 +34,8 @@ public class WelcomeActivity extends Activity {
 
 	private QuizUser quizUser;
 
+	private double quizAverage;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +45,7 @@ public class WelcomeActivity extends Activity {
 		Log.d("Auth token from intent", token);
 
 		getProfile();
+		getQuizAverage();
 
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
@@ -106,6 +110,45 @@ public class WelcomeActivity extends Activity {
 	public void displayProfile() {
 		// Joseph, use the quizUser and populate the firstname, lastname, and
 		// studentNumber fields.
+	}
+
+	public void getQuizAverage() {
+
+		String resourceURL = Config_RestServer.REST_SERVER_URL
+				+ "results/average";
+
+		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+				Request.Method.GET, resourceURL, null,
+				new Response.Listener<JSONObject>() {
+
+					@Override
+					public void onResponse(JSONObject response) {
+						Log.d("getQuizAverage", response.toString());
+						try {
+							quizAverage = response
+									.getDouble("cumulativeAverage");
+						} catch (JSONException e) {
+							Log.e("getQuizAverage", e.toString());
+						}
+					}
+				}, new Response.ErrorListener() {
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						Log.e("getQuizAverage", error.toString());
+					}
+				}) {
+			@Override
+			public Map<String, String> getHeaders() throws AuthFailureError {
+				Map<String, String> headers = super.getHeaders();
+				if (headers == null || headers.equals(Collections.emptyMap())) {
+					headers = new HashMap<String, String>();
+				}
+				headers.put("token", token);
+				return headers;
+			}
+		};
+		volleyRequestQueue.add(jsonObjectRequest);
 	}
 
 	public void startNextQuiz(View view) {
