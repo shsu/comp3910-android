@@ -1,49 +1,35 @@
 package ca.bcit.turnip;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ca.bcit.turnip.volley.toolbox.MyJsonObjectRequest;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.text.Editable;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import ca.bcit.turnip.config.Config_RestServer;
+import ca.bcit.turnip.helper.MyApp;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 public class LoginActivity extends Activity {
 
 	private RequestQueue volleyRequestQueue;
-	private JsonObjectRequest jsonObjectRequest;
-	
+
 	private String token;
-	
+
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
@@ -51,9 +37,9 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.volleyRequestQueue = MyApp.getRequestQueue();
 		setContentView(R.layout.activity_login);
-		volleyRequestQueue = Volley.newRequestQueue(this);
-		
+
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
@@ -75,40 +61,36 @@ public class LoginActivity extends Activity {
 		loginRequest(username_field.getText().toString(), password_field
 				.getText().toString());
 
-		Log.i("passed Login Request", "true");
-		
+		Log.d("passed Login Request", "true");
+
 		// ** where old token if statement was.
-		
+
 		mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 		showProgress(true);
-		
+
 		if (token != null && !token.equals("")) {
-			Log.i("Token is not null", "true");
+			Log.d("Token is not null", "true");
 		}
-		
+
 		Handler handler = new Handler();
-		
+
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				Log.i("handler delay", "500ms");
+				Log.d("handler delay", "500ms");
 				sendLogin();
 			}
 		}, 500);
-		
-			
 	}
-	
+
 	public void sendLogin() {
 		if (token != null && !token.equals("")) {
-			Log.i("in the intent", "in intent");
+			Log.d("in the intent", "in intent");
 			Intent intent = new Intent(this, WelcomeActivity.class);
 			intent.putExtra("token", token);
 			startActivity(intent);
 		}
 	}
-	
-	
 
 	public void sendRegister(View view) {
 		Intent intent = new Intent(this, Act_Register.class);
@@ -117,7 +99,8 @@ public class LoginActivity extends Activity {
 
 	private void loginRequest(String username, String password) {
 
-		String resourceURL = "http://10.0.3.2:8080/a3-server-jhou-shsu/user/authenticate";
+		String resourceURL = Config_RestServer.REST_SERVER_URL
+				+ "user/authenticate";
 		JSONObject credentials = new JSONObject();
 
 		try {
@@ -127,19 +110,17 @@ public class LoginActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		Log.i("login attempt", credentials.toString());
+		Log.d("login attempt", credentials.toString());
 
-		jsonObjectRequest = new JsonObjectRequest(
-				Request.Method.PUT, resourceURL, credentials,
-				new Response.Listener<JSONObject>() {
+		 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
+				resourceURL, credentials, new Response.Listener<JSONObject>() {
 
 					@Override
 					public void onResponse(JSONObject response) {
 						try {
 							token = response.getString("token");
-							Log.i("Auth token in response", token);
-							
-	
+							Log.d("Auth token in response", token);
+
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
@@ -152,10 +133,9 @@ public class LoginActivity extends Activity {
 					}
 				});
 		volleyRequestQueue.add(jsonObjectRequest);
-		
-		
+
 	}
-	
+
 	/**
 	 * Shows the progress UI and hides the login form.
 	 */
@@ -196,5 +176,5 @@ public class LoginActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
-	
+
 }

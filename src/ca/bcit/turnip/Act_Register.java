@@ -9,13 +9,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import ca.bcit.turnip.config.Config_RestServer;
+import ca.bcit.turnip.helper.MyApp;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 public class Act_Register extends Activity {
 
@@ -24,8 +25,8 @@ public class Act_Register extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.volleyRequestQueue = MyApp.getRequestQueue();
 		setContentView(R.layout.activity_register);
-		volleyRequestQueue = Volley.newRequestQueue(this);
 	}
 
 	@Override
@@ -59,20 +60,21 @@ public class Act_Register extends Activity {
 
 	private void registerRequest(JSONObject newUser) {
 
-		String resourceURL = "http://10.0.3.2:8080/a3-server-jhou-shsu/user/register";
+		String resourceURL = Config_RestServer.REST_SERVER_URL
+				+ "user/register";
 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
 				Request.Method.POST, resourceURL, newUser,
 				new Response.Listener<JSONObject>() {
 
 					@Override
 					public void onResponse(JSONObject response) {
-						Log.i("registerRequestResponse", response.toString());
+						Log.d("registerRequest", response.toString());
 					}
 				}, new Response.ErrorListener() {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-
+						Log.d("registerRequest", error.toString());
 					}
 				});
 		volleyRequestQueue.add(jsonObjectRequest);

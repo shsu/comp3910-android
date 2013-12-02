@@ -4,24 +4,26 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import ca.bcit.turnip.config.Config_RestServer;
+import ca.bcit.turnip.domain.QuizUser;
+import ca.bcit.turnip.helper.MyApp;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 public class WelcomeActivity extends Activity {
 
@@ -29,14 +31,26 @@ public class WelcomeActivity extends Activity {
 
 	private String token;
 
+	private QuizUser quizUser;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.volleyRequestQueue = MyApp.getRequestQueue();
+		
 		token = getIntent().getStringExtra("token");
-		Log.i("Token for this activity", token);
+		Log.d("Auth token from intent", token);
 
-		volleyRequestQueue = Volley.newRequestQueue(this);
 		getProfile();
+
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				Log.d("handler delay", "500ms");
+				displayProfile();
+			}
+		}, 500);
 
 		setContentView(R.layout.activity_welcome);
 	}
@@ -56,7 +70,7 @@ public class WelcomeActivity extends Activity {
 	}
 
 	public void getProfile() {
-		String resourceURL = "http://10.0.2.2:8080/a3-server-jhou-shsu/user/profile";
+		String resourceURL = Config_RestServer.REST_SERVER_URL + "user/profile";
 
 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
 				Request.Method.GET, resourceURL, null,
@@ -64,13 +78,16 @@ public class WelcomeActivity extends Activity {
 
 					@Override
 					public void onResponse(JSONObject response) {
-						Log.i("getProfileResponse", response.toString());
+						Gson gson = new Gson();
+						quizUser = gson.fromJson(response.toString(),
+								QuizUser.class);
+						Log.d("getProfile", response.toString());
 					}
 				}, new Response.ErrorListener() {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						Log.e("getProfileError", error.toString());
+						Log.d("getProfile", error.toString());
 					}
 				}) {
 			@Override
@@ -86,43 +103,15 @@ public class WelcomeActivity extends Activity {
 		volleyRequestQueue.add(jsonObjectRequest);
 	}
 
+	public void displayProfile() {
+		// Joseph, use the quizUser and populate the firstname, lastname, and
+		// studentNumber fields.
+	}
+
 	public void startNextQuiz(View view) {
-		startNextQuizRequest();
 		Intent intent = new Intent(this, QuizActivity.class);
 		intent.putExtra("token", token);
 		startActivity(intent);
-	}
-
-	private void startNextQuizRequest() {
-
-		String resourceURL = "http://10.0.2.2:8080/a3-server-jhou-shsu/quiz/next";
-
-		JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(resourceURL,
-				new Response.Listener<JSONArray>() {
-
-					@Override
-					public void onResponse(JSONArray response) {
-						Log.i("startNextQuizRequestResponse",
-								response.toString());
-					}
-				}, new Response.ErrorListener() {
-
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						Log.e("startNextQuizRequestResponse", error.toString());
-					}
-				}) {
-			@Override
-			public Map<String, String> getHeaders() throws AuthFailureError {
-				Map<String, String> headers = super.getHeaders();
-				if (headers == null || headers.equals(Collections.emptyMap())) {
-					headers = new HashMap<String, String>();
-				}
-				headers.put("token", token);
-				return headers;
-			}
-		};
-		volleyRequestQueue.add(jsonArrayRequest);
 	}
 
 	public void sendLogout(View view) {
@@ -132,8 +121,7 @@ public class WelcomeActivity extends Activity {
 	}
 
 	private void logoutRequest() {
-
-		String resourceURL = "http://10.0.2.2:8080/a3-server-jhou-shsu/user/logout";
+		String resourceURL = Config_RestServer.REST_SERVER_URL + "user/logout";
 
 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
 				Request.Method.GET, resourceURL, null,
@@ -141,13 +129,13 @@ public class WelcomeActivity extends Activity {
 
 					@Override
 					public void onResponse(JSONObject response) {
-						Log.i("logoutRequestResponse", response.toString());
+						Log.d("logoutRequest", response.toString());
 					}
 				}, new Response.ErrorListener() {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-
+						Log.d("logoutRequest", error.toString());
 					}
 				});
 		volleyRequestQueue.add(jsonObjectRequest);
