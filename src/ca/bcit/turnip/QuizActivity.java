@@ -66,12 +66,17 @@ public class QuizActivity extends Activity {
 	}
 
 	public void sendScore(View view) {
-		// need to gather results into selectedAnswers here
+		// need to gather results (radio groups) into selectedAnswers Character
+		// array
 
 		if (selectedAnswers != null && !selectedAnswers.isEmpty()) {
 			Intent intent = new Intent(this, ScoreActivity.class);
+
+			intent.putExtra("correctAnswers", questions.toArray());
 			intent.putExtra("selectedAnswers", selectedAnswers.toArray());
 			startActivity(intent);
+		} else {
+			// Show that answers are not selected.
 		}
 	}
 
