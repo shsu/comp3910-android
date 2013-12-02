@@ -62,7 +62,7 @@ public class LoginActivity extends Activity {
 	}
 
 	public void sendRegister(View view) {
-		Intent intent = new Intent(this, NewUserActivity.class);
+		Intent intent = new Intent(this, Act_Register.class);
 		startActivity(intent);
 	}
 
