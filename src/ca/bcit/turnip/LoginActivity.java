@@ -1,14 +1,19 @@
 package ca.bcit.turnip;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import ca.bcit.turnip.volley.toolbox.MyJsonObjectRequest;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import android.os.Bundle;
@@ -75,8 +80,8 @@ public class LoginActivity extends Activity {
 
 		Log.i("login attempt", credentials.toString());
 
-		MyJsonObjectRequest jsonObjectRequest = new MyJsonObjectRequest(
-				Request.Method.PUT, resourceURL, credentials, null,
+		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+				Request.Method.PUT, resourceURL, credentials,
 				new Response.Listener<JSONObject>() {
 
 					@Override
