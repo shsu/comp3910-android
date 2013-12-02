@@ -16,13 +16,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,14 +40,23 @@ import com.android.volley.toolbox.Volley;
 public class LoginActivity extends Activity {
 
 	private RequestQueue volleyRequestQueue;
-
+	private JsonObjectRequest jsonObjectRequest;
+	
 	private String token;
+	
+	private View mLoginFormView;
+	private View mLoginStatusView;
+	private TextView mLoginStatusMessageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		volleyRequestQueue = Volley.newRequestQueue(this);
+		
+		mLoginFormView = findViewById(R.id.login_form);
+		mLoginStatusView = findViewById(R.id.login_status);
+		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 	}
 
 	@Override
@@ -51,7 +66,7 @@ public class LoginActivity extends Activity {
 		super.onStop();
 	}
 
-	public void sendLogin(View view) {
+	public void attemptLogin(View view) {
 
 		// Should not be in onCreate because it is blank upon creation.
 		EditText username_field = (EditText) findViewById(R.id.editText_username_login);
@@ -60,13 +75,40 @@ public class LoginActivity extends Activity {
 		loginRequest(username_field.getText().toString(), password_field
 				.getText().toString());
 
+		Log.i("passed Login Request", "true");
+		
+		// ** where old token if statement was.
+		
+		mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
+		showProgress(true);
+		
 		if (token != null && !token.equals("")) {
+			Log.i("Token is not null", "true");
+		}
+		
+		Handler handler = new Handler();
+		
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				Log.i("handler delay", "500ms");
+				sendLogin();
+			}
+		}, 500);
+		
+			
+	}
+	
+	public void sendLogin() {
+		if (token != null && !token.equals("")) {
+			Log.i("in the intent", "in intent");
 			Intent intent = new Intent(this, WelcomeActivity.class);
 			intent.putExtra("token", token);
 			startActivity(intent);
 		}
-
 	}
+	
+	
 
 	public void sendRegister(View view) {
 		Intent intent = new Intent(this, Act_Register.class);
@@ -75,7 +117,7 @@ public class LoginActivity extends Activity {
 
 	private void loginRequest(String username, String password) {
 
-		String resourceURL = "http://10.0.2.2:8080/a3-server-jhou-shsu/user/authenticate";
+		String resourceURL = "http://10.0.3.2:8080/a3-server-jhou-shsu/user/authenticate";
 		JSONObject credentials = new JSONObject();
 
 		try {
@@ -87,7 +129,7 @@ public class LoginActivity extends Activity {
 
 		Log.i("login attempt", credentials.toString());
 
-		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+		jsonObjectRequest = new JsonObjectRequest(
 				Request.Method.PUT, resourceURL, credentials,
 				new Response.Listener<JSONObject>() {
 
@@ -96,6 +138,8 @@ public class LoginActivity extends Activity {
 						try {
 							token = response.getString("token");
 							Log.i("Auth token in response", token);
+							
+	
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
@@ -108,5 +152,49 @@ public class LoginActivity extends Activity {
 					}
 				});
 		volleyRequestQueue.add(jsonObjectRequest);
+		
+		
 	}
+	
+	/**
+	 * Shows the progress UI and hides the login form.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+	private void showProgress(final boolean show) {
+		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+		// for very easy animations. If available, use these APIs to fade-in
+		// the progress spinner.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+			int shortAnimTime = getResources().getInteger(
+					android.R.integer.config_shortAnimTime);
+
+			mLoginStatusView.setVisibility(View.VISIBLE);
+			mLoginStatusView.animate().setDuration(shortAnimTime)
+					.alpha(show ? 1 : 0)
+					.setListener(new AnimatorListenerAdapter() {
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							mLoginStatusView.setVisibility(show ? View.VISIBLE
+									: View.GONE);
+						}
+					});
+
+			mLoginFormView.setVisibility(View.VISIBLE);
+			mLoginFormView.animate().setDuration(shortAnimTime)
+					.alpha(show ? 0 : 1)
+					.setListener(new AnimatorListenerAdapter() {
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							mLoginFormView.setVisibility(show ? View.GONE
+									: View.VISIBLE);
+						}
+					});
+		} else {
+			// The ViewPropertyAnimator APIs are not available, so simply show
+			// and hide the relevant UI components.
+			mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
+			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+		}
+	}
+	
 }

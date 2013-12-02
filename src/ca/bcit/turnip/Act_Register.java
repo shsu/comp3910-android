@@ -59,7 +59,7 @@ public class Act_Register extends Activity {
 
 	private void registerRequest(JSONObject newUser) {
 
-		String resourceURL = "http://10.0.2.2:8080/a3-server-jhou-shsu/user/register";
+		String resourceURL = "http://10.0.3.2:8080/a3-server-jhou-shsu/user/register";
 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
 				Request.Method.POST, resourceURL, newUser,
 				new Response.Listener<JSONObject>() {
