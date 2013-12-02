@@ -49,7 +49,7 @@ public class Act_Register extends Activity {
 			newUser.put("studentNumber", et_studentId.getText().toString());
 			newUser.put("firstName", et_firstName.getText().toString());
 			newUser.put("lastName", et_lastName.getText().toString());
-			logoutRequest(newUser);
+			registerRequest(newUser);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +57,7 @@ public class Act_Register extends Activity {
 		startActivity(intent);
 	}
 
-	private void logoutRequest(JSONObject newUser) {
+	private void registerRequest(JSONObject newUser) {
 
 		String resourceURL = "http://10.0.2.2:8080/a3-server-jhou-shsu/user/register";
 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -66,7 +66,7 @@ public class Act_Register extends Activity {
 
 					@Override
 					public void onResponse(JSONObject response) {
-						Log.i("logoutRequestResponse", response.toString());
+						Log.i("registerRequestResponse", response.toString());
 					}
 				}, new Response.ErrorListener() {
 
