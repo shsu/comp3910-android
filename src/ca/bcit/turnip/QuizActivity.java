@@ -1,6 +1,7 @@
 package ca.bcit.turnip;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -69,10 +70,17 @@ public class QuizActivity extends Activity {
 		// need to gather results (radio groups) into selectedAnswers Character
 		// array
 
-		if (selectedAnswers != null && !selectedAnswers.isEmpty()) {
+		if (selectedAnswers != null && !selectedAnswers.isEmpty()
+				&& !questions.isEmpty()) {
 			Intent intent = new Intent(this, ScoreActivity.class);
+			intent.putExtra("token", token);
 
-			intent.putExtra("correctAnswers", questions.toArray());
+			intent.putExtra("quizWeek", questions.get(0).getWeek());
+			List<Character> correctAnswers = new ArrayList<Character>();
+			for (QuizQuestion question : questions) {
+				correctAnswers.add(question.getAnswer());
+			}
+			intent.putExtra("correctAnswers", correctAnswers.toArray());
 			intent.putExtra("selectedAnswers", selectedAnswers.toArray());
 			startActivity(intent);
 		} else {
