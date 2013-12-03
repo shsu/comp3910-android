@@ -180,7 +180,17 @@ public class WelcomeActivity extends Activity {
 					public void onErrorResponse(VolleyError error) {
 						Log.e("logoutRequest", error.toString());
 					}
-				});
+				}) {
+			@Override
+			public Map<String, String> getHeaders() throws AuthFailureError {
+				Map<String, String> headers = super.getHeaders();
+				if (headers == null || headers.equals(Collections.emptyMap())) {
+					headers = new HashMap<String, String>();
+				}
+				headers.put("token", token);
+				return headers;
+			}
+		};
 		volleyRequestQueue.add(jsonObjectRequest);
 	}
 }

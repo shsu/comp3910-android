@@ -113,7 +113,7 @@ public class LoginActivity extends Activity {
 		Log.d("login attempt", credentials.toString());
 
 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-				Request.Method.PUT, resourceURL, credentials,
+				Request.Method.POST, resourceURL, credentials,
 				new Response.Listener<JSONObject>() {
 
 					@Override
