@@ -20,6 +20,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 public class Act_Register extends Activity {
 
+	EditText et_username;
+	EditText et_password;
+	EditText et_confirm_password;
+	EditText et_firstName;
+	EditText et_lastName;
+	EditText et_studentId;
+	
 	private RequestQueue volleyRequestQueue;
 
 	@Override
@@ -27,6 +34,12 @@ public class Act_Register extends Activity {
 		super.onCreate(savedInstanceState);
 		this.volleyRequestQueue = MyApp.getRequestQueue();
 		setContentView(R.layout.activity_register);
+		et_username = (EditText) findViewById(R.id.editText_username);
+		 et_password = (EditText) findViewById(R.id.editText_password);
+		 et_firstName = (EditText) findViewById(R.id.editText_firstName);
+		 et_lastName = (EditText) findViewById(R.id.editText_lastName);
+		 et_studentId = (EditText) findViewById(R.id.editText_studentId);
+		 et_confirm_password = (EditText) findViewById(R.id.editText_confirm_password);
 	}
 
 	@Override
@@ -36,12 +49,33 @@ public class Act_Register extends Activity {
 		super.onStop();
 	}
 
+	public void validateEntry(View view) {
+		 
+		if( et_username.getText().toString().length() == 0 )
+		    et_username.setError( "Username is required!" );
+		
+		if( et_password.getText().toString().length() == 0 )
+		    et_password.setError( "Password is required!" );
+		
+		if( et_confirm_password.getText().toString().length() == 0 )
+		    et_confirm_password.setError( "Password is required!" );
+		
+		if( !et_confirm_password.getText().toString().equals(et_password.getText().toString()) )
+		    et_confirm_password.setError( "Passwords must match!" );
+		
+		if( et_firstName.getText().toString().length() == 0 )
+		    et_firstName.setError( "First name is required!" );
+		
+		if( et_lastName.getText().toString().length() == 0 )
+		    et_lastName.setError( "Last name is required!" );
+		
+		if( et_studentId.getText().toString().length() == 0 )
+		    et_studentId.setError( "Student ID is required!" );
+		
+	}
+	
 	public void sendRegister(View view) {
-		EditText et_username = (EditText) findViewById(R.id.editText_username);
-		EditText et_password = (EditText) findViewById(R.id.editText_password);
-		EditText et_firstName = (EditText) findViewById(R.id.editText_firstName);
-		EditText et_lastName = (EditText) findViewById(R.id.editText_lastName);
-		EditText et_studentId = (EditText) findViewById(R.id.editText_studentId);
+		
 
 		JSONObject newUser = new JSONObject();
 		try {

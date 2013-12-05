@@ -87,28 +87,23 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/button1_enter"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/editText_password_login"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="35dp"
+   		android:layout_marginTop="36dp"
         android:onClick="attemptLogin"
         android:text="@string/enter" />
-
+    
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/button2_new_user"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignLeft="@+id/editText_password_login"
-        android:layout_marginLeft="34dp"
+        android:layout_below="@+id/button1_enter"
         android:onClick="sendRegister"
         android:text="@string/new_user" />
 
-   
+    
 
 </RelativeLayout>
 </ScrollView>

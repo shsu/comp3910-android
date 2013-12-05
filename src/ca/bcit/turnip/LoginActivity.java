@@ -28,7 +28,7 @@ public class LoginActivity extends Activity {
 
 	private RequestQueue volleyRequestQueue;
 
-	private String token;
+	private String token = "";
 
 	private View mLoginFormView;
 	private View mLoginStatusView;
@@ -58,30 +58,41 @@ public class LoginActivity extends Activity {
 		EditText username_field = (EditText) findViewById(R.id.editText_username_login);
 		EditText password_field = (EditText) findViewById(R.id.editText_password_login);
 
+		if( username_field.getText().toString().trim().equals("") 
+				|| password_field.getText().toString().trim().equals(""))  // Validate empty username.
+		 {    
+		   username_field.setError( "First name is required!" );
+		   //You can Toast a message here that the Username is Empty
+		 }
+		else
+		{
+		
 		loginRequest(username_field.getText().toString(), password_field
 				.getText().toString());
 
-		Log.d("passed Login Request", "true");
+		Log.e("passed Login Request", "true");
 
 		// ** where old token if statement was.
 
 		mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 		showProgress(true);
 
-		if (token != null && !token.equals("")) {
-			Log.d("Token is not null", "true");
-		}
-
 		Handler handler = new Handler();
-
+		
+		
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				Log.d("handler delay", "500ms");
-				sendLogin();
+				Log.e("handler delay", "1000ms");					
+					sendLogin();
 			}
-		}, 500);
+		}, 1000);
+		
+		}
 	}
+	
+	
+	
 
 	public void sendLogin() {
 		if (token != null && !token.equals("")) {

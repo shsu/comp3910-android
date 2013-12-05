@@ -1,5 +1,6 @@
 package ca.bcit.turnip;
 
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 import ca.bcit.turnip.config.Config_RestServer;
 import ca.bcit.turnip.domain.QuizUser;
 import ca.bcit.turnip.helper.MyApp;
@@ -32,9 +34,20 @@ public class WelcomeActivity extends Activity {
 
 	private String token;
 
-	private QuizUser quizUser;
+	private QuizUser quizUser;  // user, firstname, lastname
 
-	private double quizAverage;
+	private double quizAverage;  // 1.0 = 100%. 
+	
+	private TextView t_username;
+	private TextView t_quizStats;
+	
+	private String round()
+	{
+		double x = quizAverage * 100;
+	    DecimalFormat twoDForm = new DecimalFormat("#.#");
+	    
+	    return twoDForm.format(x);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +64,11 @@ public class WelcomeActivity extends Activity {
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				Log.d("handler delay", "500ms");
+				Log.d("handler delay", "1000ms");
 				displayProfile();
+				displayQuizAverage();
 			}
-		}, 500);
+		}, 1000);
 
 		setContentView(R.layout.activity_welcome);
 	}
@@ -108,10 +122,17 @@ public class WelcomeActivity extends Activity {
 	}
 
 	public void displayProfile() {
-		// Joseph, use the quizUser and populate the firstname, lastname, and
-		// studentNumber fields.
+		
+		t_username = (TextView) findViewById(R.id.textView_username_welcome); 
+		t_username.setText(quizUser.getFirstName() + " "  + quizUser.getLastName() + " (" + quizUser.getStudentNumber() + ")");
+		
 	}
 
+	public void displayQuizAverage(){
+		t_quizStats = (TextView) findViewById(R.id.textView_user_average_score);
+		t_quizStats.setText(round() + "%");
+	}
+	
 	public void getQuizAverage() {
 
 		String resourceURL = Config_RestServer.REST_SERVER_URL

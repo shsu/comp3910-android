@@ -21,7 +21,7 @@
         android:text="@string/welcome" />
 
     <TextView
-        android:id="@+id/textView_username"
+        android:id="@+id/textView_username_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView_welcome"
@@ -33,8 +33,8 @@
         android:id="@+id/textView_quizzes_taken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView_username"
-        android:layout_below="@+id/textView_username"
+        android:layout_alignLeft="@+id/textView_username_welcome"
+        android:layout_below="@+id/textView_username_welcome"
         android:layout_marginTop="16dp"
         android:text="@string/quizzes_taken"
         android:textAppearance="?android:attr/textAppearanceMedium" />

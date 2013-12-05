@@ -15,6 +15,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import ca.bcit.turnip.config.Config_RestServer;
 import ca.bcit.turnip.domain.QuizQuestion;
 import ca.bcit.turnip.helper.MyApp;
@@ -37,6 +40,10 @@ public class QuizActivity extends Activity {
 
 	private List<Character> selectedAnswers;
 
+	private ListView lv;
+	
+	private int quizNumber;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,19 +52,25 @@ public class QuizActivity extends Activity {
 		token = getIntent().getStringExtra("token");
 		Log.d("Auth token from intent", token);
 
+		setContentView(R.layout.activity_quiz);
+		
 		getNextQuiz();
 
 		Handler handler = new Handler();
+		
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				Log.d("handler delay", "500ms");
+				Log.d("handler delay", "3000ms");
 				displayNextQuiz();
 			}
-		}, 500);
+		}, 3000);
 
-		setContentView(R.layout.activity_quiz);
+		
+
+		
 	}
+	
 
 	@Override
 	protected void onStop() {
@@ -125,6 +138,27 @@ public class QuizActivity extends Activity {
 	}
 
 	protected void displayNextQuiz() {
-
+		// iterate through and create question elements, 4 choices, link choices to the 
+		Log.i("quiz", questions.toString());
+		
+		lv = (ListView) findViewById(R.id.ListView_quiz);
+	
+		quizNumber = questions.get(0).getWeek();
+		
+		TextView t_quiz_title = (TextView) findViewById(R.id.TextView_quiz_title);
+		t_quiz_title.setText("Quiz #" + quizNumber);
+			
+		ArrayList<String> quiz_list = new ArrayList<String>();
+		
+		for (QuizQuestion q: questions){
+			quiz_list.add(q.getQuestion());
+		}
+      
+		// This is the array adapter, it takes the context of the activity as a first 
+        // parameter, the type of list view as a second parameter and your array as a third parameter
+        
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, quiz_list);
+        lv.setAdapter(arrayAdapter);
+		
 	}
 }
