@@ -61,14 +61,11 @@ public class QuizActivity extends Activity {
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				Log.d("handler delay", "3000ms");
+				Log.d("handler delay", "1000ms");
 				displayNextQuiz();
 			}
-		}, 3000);
-
-		
-
-		
+		}, 1000);
+	
 	}
 	
 
@@ -151,7 +148,7 @@ public class QuizActivity extends Activity {
 		ArrayList<String> quiz_list = new ArrayList<String>();
 		
 		for (QuizQuestion q: questions){
-			quiz_list.add(q.getQuestion());
+			quiz_list.add(q.getQuestionNumber() + ". " + q.getQuestion());
 		}
       
 		// This is the array adapter, it takes the context of the activity as a first 
