@@ -25,13 +25,19 @@ public final class R {
     }
     public static final class id {
         public static final int ListView_quiz=0x7f08000a;
+        public static final int RadioButton01=0x7f080025;
+        public static final int RadioButton02=0x7f080026;
+        public static final int RadioButton03=0x7f080027;
+        public static final int RadioButton04=0x7f080028;
+        public static final int RadioGroup01=0x7f080024;
+        public static final int TextView01=0x7f080023;
         public static final int TextView_confirm_password=0x7f080019;
         public static final int TextView_quiz_title=0x7f080009;
-        public static final int action_settings=0x7f080025;
+        public static final int action_settings=0x7f080029;
         public static final int bottomArea=0x7f08000b;
         public static final int button1_enter=0x7f080007;
         public static final int button2_new_user=0x7f080008;
-        public static final int button_logout=0x7f080024;
+        public static final int button_logout=0x7f080021;
         public static final int button_register=0x7f080018;
         public static final int button_return=0x7f08001b;
         public static final int button_start_next_quiz=0x7f080022;
@@ -53,10 +59,8 @@ public final class R {
         public static final int textView_lastName=0x7f080015;
         public static final int textView_new_user_registration=0x7f08000d;
         public static final int textView_password=0x7f080011;
-        public static final int textView_quiz_results=0x7f080021;
-        public static final int textView_quizzes_taken=0x7f080020;
         public static final int textView_studentId=0x7f080017;
-        public static final int textView_user_average_score=0x7f080023;
+        public static final int textView_user_average_score=0x7f080020;
         public static final int textView_username=0x7f08000f;
         public static final int textView_username_welcome=0x7f08001f;
         public static final int textView_welcome=0x7f08001e;
@@ -69,6 +73,7 @@ public final class R {
         public static final int activity_register=0x7f030002;
         public static final int activity_score=0x7f030003;
         public static final int activity_welcome=0x7f030004;
+        public static final int rowlayout=0x7f030005;
     }
     public static final class menu {
         public static final int first=0x7f070000;

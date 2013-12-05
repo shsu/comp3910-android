@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
@@ -17,7 +19,7 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
     private ArrayList<QuizQuestion> questions;
     private static LayoutInflater inflater = null;
 
-    public QuizAdapter (Activity activity, int textViewResourceId,ArrayList<QuizQuestion> _questions) {
+    public QuizAdapter (Activity activity, int textViewResourceId, ArrayList<QuizQuestion> _questions) {
         super(activity, textViewResourceId, _questions);
         try {
             this.activity = activity;
@@ -43,30 +45,37 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
         public TextView display_number;             
 
     }
-/*
+
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
-        final ViewHolder holder;
+        final MyViewHolder holder;
         try {
             if (convertView == null) {
-                vi = inflater.inflate(R.layout.yourlayout, null);
-                holder = new ViewHolder();
+                vi = inflater.inflate(R.layout.rowlayout, null);
+                holder = new MyViewHolder();
 
-                holder.display_name = (TextView) vi.findViewById(R.id.display_name);
-                holder.display_number = (TextView) vi.findViewById(R.id.display_number);
-
-
+                holder.question_text = (TextView) vi.findViewById(R.id.TextView01);
+                holder.answer_options = (RadioGroup) vi.findViewById(R.id.RadioGroup01);
+                holder.a = (RadioButton) vi.findViewById(R.id.RadioButton01);
+                holder.b = (RadioButton) vi.findViewById(R.id.RadioButton02);
+                holder.c = (RadioButton) vi.findViewById(R.id.RadioButton03);
+                holder.d = (RadioButton) vi.findViewById(R.id.RadioButton04);
+                
                 vi.setTag(holder);
             } else {
-                holder = (ViewHolder) vi.getTag();
+                holder = (MyViewHolder) vi.getTag();
             }
 
-
-
-            holder.display_name.setText(lProducts.get(position).name);
-            holder.display_number.setText(lProducts.get(position).number);
-
-
+            holder.question_text.setText(questions.get(position).getQuestion());
+            holder.a.setText(questions.get(position).getChoiceA());
+            holder.b.setText(questions.get(position).getChoiceB());
+            holder.c.setText(questions.get(position).getChoiceC());
+            holder.d.setText(questions.get(position).getChoiceD());
+            holder.answer_options.addView(holder.a);
+            holder.answer_options.addView(holder.b);
+            holder.answer_options.addView(holder.c);
+            holder.answer_options.addView(holder.d);
+            
         } catch (Exception e) {
 
 
@@ -74,6 +83,14 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
         return vi;
     }
 	
-*/	
+    private static class MyViewHolder extends ViewHolder {
+    	  TextView question_text;
+    	  RadioGroup answer_options;
+    	  RadioButton a;
+    	  RadioButton b;
+    	  RadioButton c;
+    	  RadioButton d;
+    	}
+	
 	
 }

@@ -30,41 +30,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textView_quizzes_taken"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView_username_welcome"
         android:layout_below="@+id/textView_username_welcome"
-        android:layout_marginTop="16dp"
-        android:text="@string/quizzes_taken"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView_quiz_results"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView_quizzes_taken"
-        android:layout_below="@+id/textView_quizzes_taken"
-        android:text="@string/quiz_results"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/button_start_next_quiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView_quizzes_taken"
-        android:layout_below="@+id/textView_user_average_score"
-        android:layout_marginBottom="30dp"
-        android:text="@string/start_next_quiz"
-        android:onClick="startNextQuiz" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView_quiz_results"
-        android:layout_below="@+id/textView_quiz_results"
         android:layout_marginTop="16dp"
         android:text="@string/average_score"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -89,6 +59,16 @@
         android:layout_marginLeft="16dp"
         android:onClick="sendLogout"
         android:text="@string/logout" />
+
+    <Button
+        android:id="@+id/button_start_next_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_logout"
+        android:layout_marginLeft="27dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:onClick="startNextQuiz"
+        android:text="@string/start_next_quiz" />
     
 </RelativeLayout>
 </ScrollView>
