@@ -117,6 +117,12 @@ public class QuizActivity extends Activity {
 					@Override
 					public void onErrorResponse(VolleyError error) {
 						Log.e("getNextQuiz", error.toString());
+						switch (error.networkResponse.statusCode) {
+						case 404:
+							// quiz not found, happens when you reach 15th quiz
+							break;
+
+						}
 					}
 				}) {
 			@Override

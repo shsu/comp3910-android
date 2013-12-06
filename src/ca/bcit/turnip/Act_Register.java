@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import ca.bcit.turnip.config.Config_RestServer;
 import ca.bcit.turnip.helper.MyApp;
+import ca.bcit.turnip.helper.VolleyHandler;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -116,13 +117,8 @@ public class Act_Register extends Activity {
 				+ "user/register";
 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
 				Request.Method.POST, resourceURL, newUser,
-				new Response.Listener<JSONObject>() {
-
-					@Override
-					public void onResponse(JSONObject response) {
-						Log.d("registerRequest", response.toString());
-					}
-				}, new Response.ErrorListener() {
+				VolleyHandler.getDefaultResponseListner(),
+				new Response.ErrorListener() {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {

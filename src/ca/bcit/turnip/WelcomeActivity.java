@@ -1,9 +1,6 @@
 package ca.bcit.turnip;
 
 import java.text.DecimalFormat;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,13 +17,12 @@ import android.widget.TextView;
 import ca.bcit.turnip.config.Config_RestServer;
 import ca.bcit.turnip.domain.QuizUser;
 import ca.bcit.turnip.helper.MyApp;
+import ca.bcit.turnip.helper.VolleyHandler;
+import ca.bcit.turnip.volley.toolbox.MyJsonObjectRequest;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 public class WelcomeActivity extends Activity {
@@ -92,8 +88,8 @@ public class WelcomeActivity extends Activity {
 	public void getProfile() {
 		String resourceURL = Config_RestServer.REST_SERVER_URL + "user/profile";
 
-		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-				Request.Method.GET, resourceURL, null,
+		MyJsonObjectRequest jsonObjectRequest = new MyJsonObjectRequest(
+				Request.Method.GET, resourceURL, null, token,
 				new Response.Listener<JSONObject>() {
 
 					@Override
@@ -103,23 +99,7 @@ public class WelcomeActivity extends Activity {
 								QuizUser.class);
 						Log.d("getProfile", response.toString());
 					}
-				}, new Response.ErrorListener() {
-
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						Log.e("getProfile", error.toString());
-					}
-				}) {
-			@Override
-			public Map<String, String> getHeaders() throws AuthFailureError {
-				Map<String, String> headers = super.getHeaders();
-				if (headers == null || headers.equals(Collections.emptyMap())) {
-					headers = new HashMap<String, String>();
-				}
-				headers.put("token", token);
-				return headers;
-			}
-		};
+				}, VolleyHandler.getDefaultErrorListner());
 		volleyRequestQueue.add(jsonObjectRequest);
 	}
 
@@ -146,8 +126,8 @@ public class WelcomeActivity extends Activity {
 		String resourceURL = Config_RestServer.REST_SERVER_URL
 				+ "results/average";
 
-		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-				Request.Method.GET, resourceURL, null,
+		MyJsonObjectRequest jsonObjectRequest = new MyJsonObjectRequest(
+				Request.Method.GET, resourceURL, null, token,
 				new Response.Listener<JSONObject>() {
 
 					@Override
@@ -160,23 +140,7 @@ public class WelcomeActivity extends Activity {
 							Log.e("getQuizAverage", e.toString());
 						}
 					}
-				}, new Response.ErrorListener() {
-
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						Log.e("getQuizAverage", error.toString());
-					}
-				}) {
-			@Override
-			public Map<String, String> getHeaders() throws AuthFailureError {
-				Map<String, String> headers = super.getHeaders();
-				if (headers == null || headers.equals(Collections.emptyMap())) {
-					headers = new HashMap<String, String>();
-				}
-				headers.put("token", token);
-				return headers;
-			}
-		};
+				}, VolleyHandler.getDefaultErrorListner());
 		volleyRequestQueue.add(jsonObjectRequest);
 	}
 
@@ -189,31 +153,9 @@ public class WelcomeActivity extends Activity {
 	private void logoutRequest() {
 		String resourceURL = Config_RestServer.REST_SERVER_URL + "user/logout";
 
-		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-				Request.Method.GET, resourceURL, null,
-				new Response.Listener<JSONObject>() {
-
-					@Override
-					public void onResponse(JSONObject response) {
-						Log.d("logoutRequest", response.toString());
-					}
-				}, new Response.ErrorListener() {
-
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						Log.e("logoutRequest", error.toString());
-					}
-				}) {
-			@Override
-			public Map<String, String> getHeaders() throws AuthFailureError {
-				Map<String, String> headers = super.getHeaders();
-				if (headers == null || headers.equals(Collections.emptyMap())) {
-					headers = new HashMap<String, String>();
-				}
-				headers.put("token", token);
-				return headers;
-			}
-		};
+		MyJsonObjectRequest jsonObjectRequest = new MyJsonObjectRequest(
+				Request.Method.GET, resourceURL, null, token,
+				VolleyHandler.getDefaultResponseListner(), VolleyHandler.getDefaultErrorListner());
 		volleyRequestQueue.add(jsonObjectRequest);
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);

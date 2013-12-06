@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import ca.bcit.turnip.config.Config_RestServer;
 import ca.bcit.turnip.helper.MyApp;
+import ca.bcit.turnip.helper.VolleyHandler;
 import ca.bcit.turnip.volley.toolbox.MyJsonObjectRequest;
 
 import com.android.volley.Request;
@@ -77,13 +78,8 @@ public class ScoreActivity extends Activity {
 
 		MyJsonObjectRequest jsonObjectRequest = new MyJsonObjectRequest(
 				Request.Method.POST, resourceURL, results,token,
-				new Response.Listener<JSONObject>() {
-
-					@Override
-					public void onResponse(JSONObject response) {
-						Log.i("sendQuizResult", response.toString());
-					}
-				}, new Response.ErrorListener() {
+				VolleyHandler.getDefaultResponseListner(),
+				new Response.ErrorListener() {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
