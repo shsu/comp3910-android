@@ -126,7 +126,12 @@ public class Act_Register extends Activity {
 
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						Log.e("registerRequest", error.toString());
+						switch (error.networkResponse.statusCode) {
+						case 400:
+							// Invalid user (highly unlikely)
+						case 409:
+							// user already exists!
+						}
 					}
 				});
 		volleyRequestQueue.add(jsonObjectRequest);
