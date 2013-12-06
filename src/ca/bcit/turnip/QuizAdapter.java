@@ -1,8 +1,7 @@
 package ca.bcit.turnip;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import ca.bcit.turnip.domain.QuizQuestion;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,17 +11,17 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import ca.bcit.turnip.domain.QuizQuestion;
 
 public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
 
-	private Activity activity;
-    private ArrayList<QuizQuestion> questions;
+	private List<QuizQuestion> questions;
     private static LayoutInflater inflater = null;
 
-    public QuizAdapter (Activity activity, int textViewResourceId, ArrayList<QuizQuestion> _questions) {
+	public QuizAdapter(Activity activity, int textViewResourceId,
+			List<QuizQuestion> _questions) {
         super(activity, textViewResourceId, _questions);
         try {
-            this.activity = activity;
             this.questions = _questions;
 
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -32,11 +31,13 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
         }
     }
 
-    public int getCount() {
+    @Override
+	public int getCount() {
         return questions.size();
     }
 
-    public long getItemId(int position) {
+    @Override
+	public long getItemId(int position) {
         return position;
     }
 
@@ -46,7 +47,8 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
 
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+	public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         final MyViewHolder holder;
         try {

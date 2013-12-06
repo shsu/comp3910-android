@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import ca.bcit.turnip.config.Config_RestServer;
@@ -136,7 +135,7 @@ public class QuizActivity extends Activity {
 
 	protected void displayNextQuiz() {
 		// iterate through and create question elements, 4 choices, link choices to the 
-		Log.i("quiz", questions.toString());
+		Log.d("quiz", questions.toString());
 		
 		lv = (ListView) findViewById(R.id.ListView_quiz);
 	
@@ -145,16 +144,11 @@ public class QuizActivity extends Activity {
 		TextView t_quiz_title = (TextView) findViewById(R.id.TextView_quiz_title);
 		t_quiz_title.setText("Quiz #" + quizNumber);
 			
-		ArrayList<QuizQuestion> quiz_list = new ArrayList<QuizQuestion>();
-		
-		for (QuizQuestion q: questions){
-			quiz_list.add(q);
-		}
-      
 		// This is the array adapter, it takes the context of the activity as a first 
         // parameter, the type of list view as a second parameter and your array as a third parameter
         
-        QuizAdapter arrayAdapter = new QuizAdapter(this, android.R.layout.simple_list_item_multiple_choice, quiz_list);
+		QuizAdapter arrayAdapter = new QuizAdapter(this,
+				android.R.layout.simple_list_item_multiple_choice, questions);
         lv.setAdapter(arrayAdapter);
 		
 	}
