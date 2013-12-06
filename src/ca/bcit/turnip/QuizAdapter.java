@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +81,7 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
             holder.answer_options.addView(holder.d);
             
         } catch (Exception e) {
-
+			Log.e("getView", e.toString());
 
         }
         return vi;
