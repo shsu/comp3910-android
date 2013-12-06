@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -63,12 +64,19 @@ public class QuizActivity extends Activity {
 		}, 1000);
 	
 	}
-	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.quiz, menu);
+		return true;
+	}
 
 	@Override
 	protected void onStop() {
-		if (volleyRequestQueue != null)
+		if (volleyRequestQueue != null) {
 			volleyRequestQueue.cancelAll(this);
+		}
 		super.onStop();
 	}
 

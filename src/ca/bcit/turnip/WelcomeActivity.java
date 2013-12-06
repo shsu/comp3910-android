@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import ca.bcit.turnip.config.Config_RestServer;
@@ -31,24 +32,12 @@ import com.google.gson.Gson;
 public class WelcomeActivity extends Activity {
 
 	private RequestQueue volleyRequestQueue;
-
 	private String token;
-
-	private QuizUser quizUser;  // user, firstname, lastname
-
-	private double quizAverage;  // 1.0 = 100%. 
-	
+	private QuizUser quizUser;
 	private TextView t_username;
 	private TextView t_quizStats;
+	private double quizAverage;
 	
-	private String round()
-	{
-		double x = quizAverage * 100;
-	    DecimalFormat twoDForm = new DecimalFormat("#.#");
-	    
-	    return twoDForm.format(x);
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,14 +65,27 @@ public class WelcomeActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.second, menu);
+		getMenuInflater().inflate(R.menu.welcome, menu);
 		return true;
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.action_logout:
+			logoutRequest();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
 	protected void onStop() {
-		if (volleyRequestQueue != null)
+		if (volleyRequestQueue != null) {
 			volleyRequestQueue.cancelAll(this);
+		}
 		super.onStop();
 	}
 
@@ -133,6 +135,12 @@ public class WelcomeActivity extends Activity {
 		t_quizStats.setText(round() + "%");
 	}
 	
+	private String round() {
+		double x = quizAverage * 100;
+		DecimalFormat twoDForm = new DecimalFormat("#.#");
+		return twoDForm.format(x);
+	}
+
 	public void getQuizAverage() {
 
 		String resourceURL = Config_RestServer.REST_SERVER_URL
@@ -178,12 +186,6 @@ public class WelcomeActivity extends Activity {
 		startActivity(intent);
 	}
 
-	public void sendLogout(View view) {
-		logoutRequest();
-		Intent intent = new Intent(this, LoginActivity.class);
-		startActivity(intent);
-	}
-
 	private void logoutRequest() {
 		String resourceURL = Config_RestServer.REST_SERVER_URL + "user/logout";
 
@@ -213,5 +215,7 @@ public class WelcomeActivity extends Activity {
 			}
 		};
 		volleyRequestQueue.add(jsonObjectRequest);
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivity(intent);
 	}
 }
