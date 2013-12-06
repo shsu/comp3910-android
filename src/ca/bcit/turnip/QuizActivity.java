@@ -80,22 +80,20 @@ public class QuizActivity extends Activity {
 	}
 
 	public void sendScore(View view) {
-		Map<Character,Character> answers = new HashMap<Character,Character>();
+
+		int score = 0;
 		for (QuizQuestion question : questions) {
-			answers.put(question.getAnswer(), question.getSelectedAnswer());
+			if (question.getAnswer().equals(question.getSelectedAnswer())) {
+				score++;
+			}
 		}
 
-		if (!answers.values().contains(null)) {
-			Intent intent = new Intent(this, ScoreActivity.class);
-			intent.putExtra("token", token);
-
-			intent.putExtra("quizWeek", questions.get(0).getWeek());
-			intent.putExtra("correctAnswers", answers.keySet().toArray());
-			intent.putExtra("selectedAnswers", answers.values().toArray());
-			startActivity(intent);
-		} else {
-			// Show that answers are not selected.
-		}
+		Intent intent = new Intent(this, ScoreActivity.class);
+		intent.putExtra("token", token);
+		intent.putExtra("quizWeek", questions.get(0).getWeek());
+		intent.putExtra("score", score);
+		intent.putExtra("totalPossibleScore", questions.size());
+		startActivity(intent);
 	}
 
 	private void getNextQuiz() {
