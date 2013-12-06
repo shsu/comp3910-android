@@ -10,6 +10,7 @@ public class QuizQuestion {
     private String choiceC;
     private String choiceD;
     private Character answer;// enum?
+	private Character selectedAnswer;
 
     public QuizQuestion() {
     }
@@ -85,4 +86,12 @@ public class QuizQuestion {
     public void setAnswer(Character answer) {
         this.answer = answer;
     }
+
+	public Character getSelectedAnswer() {
+		return selectedAnswer;
+	}
+
+	public void setSelectedAnswer(Character selectedAnswer) {
+		this.selectedAnswer = selectedAnswer;
+	}
 }

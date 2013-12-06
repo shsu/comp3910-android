@@ -80,9 +80,40 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
             holder.answer_options.addView(holder.c);
             holder.answer_options.addView(holder.d);
             
-        } catch (Exception e) {
-			Log.e("getView", e.toString());
+			holder.answer_options
+					.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
+						@Override
+						public void onCheckedChanged(RadioGroup group,
+								int checkedId) {
+							Integer pos = (Integer) group.getTag();
+							QuizQuestion question = questions.get(pos);
+
+							switch (checkedId) {
+							case R.id.RadioButton01:
+								question.setSelectedAnswer('A');
+								break;
+							case R.id.RadioButton02:
+								question.setSelectedAnswer('B');
+								break;
+							case R.id.RadioButton03:
+								question.setSelectedAnswer('C');
+								break;
+							case R.id.RadioButton04:
+								question.setSelectedAnswer('D');
+								break;
+							default:
+								question.setSelectedAnswer(null);
+							}
+
+							if (question.getSelectedAnswer() != null) {
+								Log.d("selectedAnswer", question
+										.getSelectedAnswer().toString());
+							}
+						}
+					});
+		} catch (Exception e) {
+			Log.e("getView", e.toString());
         }
         return vi;
     }
