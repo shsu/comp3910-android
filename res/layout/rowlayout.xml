@@ -24,24 +24,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
+        android:checked="false"
         android:text="@string/a" />
 
     <RadioButton
         android:id="@+id/RadioButton02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checked="false"
         android:text="@string/b" />
 
     <RadioButton
         android:id="@+id/RadioButton03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checked="false"
         android:text="@string/c" />
 
     <RadioButton
         android:id="@+id/RadioButton04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
+        android:checked="false"
         android:text="@string/d" />
 </RadioGroup>
 
