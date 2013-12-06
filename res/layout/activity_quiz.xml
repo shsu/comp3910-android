@@ -28,12 +28,7 @@
  
 
 </ListView>
-<RelativeLayout 
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-         android:id="@+id/bottomArea"
-         >
+
 <Button
         android:id="@+id/button_submit"
         android:layout_width="match_parent"
@@ -41,6 +36,6 @@
         android:onClick="sendScore"
         android:text="@string/submit"
          />
-</RelativeLayout>
+
 </RelativeLayout>
 

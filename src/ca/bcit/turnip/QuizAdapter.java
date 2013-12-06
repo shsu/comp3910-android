@@ -66,7 +66,8 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
                 holder = (MyViewHolder) vi.getTag();
             }
 
-            holder.question_text.setText(questions.get(position).getQuestion());
+            holder.question_text.setText(questions.get(position).getQuestionNumber() + ". " + 
+            questions.get(position).getQuestion());
             holder.a.setText(questions.get(position).getChoiceA());
             holder.b.setText(questions.get(position).getChoiceB());
             holder.c.setText(questions.get(position).getChoiceC());
