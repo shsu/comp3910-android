@@ -56,13 +56,13 @@ public final class R {
         public static final int textView_firstName=0x7f080010;
         public static final int textView_lastName=0x7f080012;
         public static final int textView_password=0x7f08000e;
+        public static final int textView_quiz_score=0x7f08001a;
         public static final int textView_studentId=0x7f080014;
         public static final int textView_user_average_score=0x7f08001d;
         public static final int textView_username=0x7f08000c;
         public static final int textView_username_welcome=0x7f08001c;
         public static final int textView_welcome=0x7f08001b;
         public static final int textView_your_score_is=0x7f080019;
-        public static final int textdView_quiz_score=0x7f08001a;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;

@@ -26,7 +26,7 @@
         android:layout_centerVertical="true"
         android:text="@string/your_score_is" />
      <TextView
-        android:id="@+id/textdView_quiz_score"
+        android:id="@+id/textView_quiz_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_your_score_is"

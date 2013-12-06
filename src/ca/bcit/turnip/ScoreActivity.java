@@ -1,5 +1,7 @@
 package ca.bcit.turnip;
 
+import java.text.DecimalFormat;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import ca.bcit.turnip.config.Config_RestServer;
 import ca.bcit.turnip.helper.MyApp;
 import ca.bcit.turnip.helper.VolleyHandler;
@@ -23,6 +26,8 @@ public class ScoreActivity extends Activity {
 	private RequestQueue volleyRequestQueue;
 
 	private String token;
+	
+	private TextView t;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +44,10 @@ public class ScoreActivity extends Activity {
 
 		setTitle("Quiz #" + quizWeek + " Results");
 		sendQuizResult(quizWeek, score, totalPossibleScore);
-		displayQuizResult(score, totalPossibleScore);
 
 		setContentView(R.layout.activity_score);
+		
+		displayQuizResult(score, totalPossibleScore);
 	}
 
 	@Override
@@ -60,6 +66,15 @@ public class ScoreActivity extends Activity {
 
 	private void displayQuizResult(int score, int totalPossibleScore) {
 		// don't forget to cast if you are getting the percentage.
+		double r = 100 * (double)score / totalPossibleScore;
+		
+		DecimalFormat twoDForm = new DecimalFormat("#.#");
+		String j = twoDForm.format(r);
+		
+		t = (TextView) findViewById(R.id.textView_quiz_score);
+		
+		t.setText(j + "%");
+		
 	}
 
 	private void sendQuizResult(final int quizWeek, final int score,
@@ -90,4 +105,7 @@ public class ScoreActivity extends Activity {
 		volleyRequestQueue.add(jsonObjectRequest);
 	}
 
+
+
+	
 }
