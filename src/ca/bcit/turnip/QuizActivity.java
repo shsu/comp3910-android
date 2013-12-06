@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 import ca.bcit.turnip.config.Config_RestServer;
 import ca.bcit.turnip.domain.QuizQuestion;
 import ca.bcit.turnip.helper.MyApp;
@@ -142,9 +141,7 @@ public class QuizActivity extends Activity {
 		lv = (ListView) findViewById(R.id.ListView_quiz);
 	
 		quizNumber = questions.get(0).getWeek();
-		
-		TextView t_quiz_title = (TextView) findViewById(R.id.TextView_quiz_title);
-		t_quiz_title.setText("Quiz #" + quizNumber);
+		setTitle("Quiz #" + quizNumber);
 			
 		// This is the array adapter, it takes the context of the activity as a first 
         // parameter, the type of list view as a second parameter and your array as a third parameter
