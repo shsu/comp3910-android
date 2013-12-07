@@ -58,7 +58,9 @@ public class QuizActivity extends Activity {
 			@Override
 			public void run() {
 				Log.d("handler delay", "1000ms");
-				displayNextQuiz();
+				if (questions != null) {
+					displayNextQuiz();
+				}
 			}
 		}, 1000);
 	
@@ -121,7 +123,6 @@ public class QuizActivity extends Activity {
 						case 404:
 							// quiz not found, happens when you reach 15th quiz
 							break;
-
 						}
 					}
 				}) {
