@@ -17,18 +17,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import ca.bcit.turnip.config.Config_RestServer;
 import ca.bcit.turnip.helper.MyApp;
+import ca.bcit.turnip.helper.VolleyHandler;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 public class LoginActivity extends Activity {
 
 	private RequestQueue volleyRequestQueue;
 
-	private String token = "";
+	private String token;
 
 	private View mLoginFormView;
 	private View mLoginStatusView;
@@ -38,6 +38,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.volleyRequestQueue = MyApp.getRequestQueue();
+		token = "";
 		setContentView(R.layout.activity_login);
 
 		mLoginFormView = findViewById(R.id.login_form);
@@ -47,8 +48,9 @@ public class LoginActivity extends Activity {
 
 	@Override
 	protected void onStop() {
-		if (volleyRequestQueue != null)
+		if (volleyRequestQueue != null) {
 			volleyRequestQueue.cancelAll(this);
+		}
 		super.onStop();
 	}
 
@@ -59,40 +61,32 @@ public class LoginActivity extends Activity {
 		EditText password_field = (EditText) findViewById(R.id.editText_password_login);
 
 		if( username_field.getText().toString().trim().equals("") 
-				|| password_field.getText().toString().trim().equals(""))  // Validate empty username.
-		 {    
+				|| password_field.getText().toString().trim().equals("")) {
 		   username_field.setError( "First name is required!" );
 		   //You can Toast a message here that the Username is Empty
-		 }
-		else
-		{
+		} else {
 		
 		loginRequest(username_field.getText().toString(), password_field
 				.getText().toString());
-
-		Log.e("passed Login Request", "true");
-
-		// ** where old token if statement was.
 
 		mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 		showProgress(true);
 
 		Handler handler = new Handler();
 		
-		
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				Log.e("handler delay", "1000ms");					
-					sendLogin();
+					Log.e("handler delay", "1000ms");
+					if (!token.equals("")) {
+						sendLogin();
+					} else {
+						showProgress(false);
+					}
 			}
 		}, 1000);
-		
 		}
 	}
-	
-	
-	
 
 	public void sendLogin() {
 		if (token != null && !token.equals("")) {
@@ -132,18 +126,11 @@ public class LoginActivity extends Activity {
 						try {
 							token = response.getString("token");
 							Log.d("Auth token in response", token);
-
 						} catch (JSONException e) {
 							Log.e("loginRequest", e.toString());
 						}
 					}
-				}, new Response.ErrorListener() {
-
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						Log.e("loginRequest", error.toString());
-					}
-				});
+				}, VolleyHandler.getDefaultErrorListner());
 		volleyRequestQueue.add(jsonObjectRequest);
 
 	}
