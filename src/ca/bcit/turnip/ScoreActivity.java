@@ -21,14 +21,25 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+/**
+ * The Class ScoreActivity.
+ */
 public class ScoreActivity extends Activity {
 
+	/** The volley request queue. */
 	private RequestQueue volleyRequestQueue;
 
+	/** The token. */
 	private String token;
 
+	/** The t. */
 	private TextView t;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +61,11 @@ public class ScoreActivity extends Activity {
 		displayQuizResult(score, totalPossibleScore);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onStop()
+	 */
 	@Override
 	protected void onStop() {
 		if (volleyRequestQueue != null) {
@@ -58,12 +74,26 @@ public class ScoreActivity extends Activity {
 		super.onStop();
 	}
 
+	/**
+	 * Send return.
+	 * 
+	 * @param view
+	 *            the view
+	 */
 	public void sendReturn(View view) {
 		Intent intent = new Intent(this, WelcomeActivity.class);
 		intent.putExtra("token", token);
 		startActivity(intent);
 	}
 
+	/**
+	 * Display quiz result.
+	 * 
+	 * @param score
+	 *            the score
+	 * @param totalPossibleScore
+	 *            the total possible score
+	 */
 	private void displayQuizResult(int score, int totalPossibleScore) {
 		// don't forget to cast if you are getting the percentage.
 		t = (TextView) findViewById(R.id.textView_quiz_score);
@@ -82,6 +112,16 @@ public class ScoreActivity extends Activity {
 
 	}
 
+	/**
+	 * Send quiz result.
+	 * 
+	 * @param quizWeek
+	 *            the quiz week
+	 * @param score
+	 *            the score
+	 * @param totalPossibleScore
+	 *            the total possible score
+	 */
 	private void sendQuizResult(final int quizWeek, final int score,
 			final int totalPossibleScore) {
 		JSONObject results = new JSONObject();

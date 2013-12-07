@@ -8,8 +8,16 @@ import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 
+/**
+ * The Class VolleyHandler.
+ */
 public final class VolleyHandler {
 
+	/**
+	 * Gets the default error listner.
+	 * 
+	 * @return the default error listner
+	 */
 	public static final Response.ErrorListener getDefaultErrorListner() {
 
 		Response.ErrorListener response = new Response.ErrorListener() {
@@ -22,6 +30,11 @@ public final class VolleyHandler {
 		return response;
 	}
 
+	/**
+	 * Gets the default response listner.
+	 * 
+	 * @return the default response listner
+	 */
 	public static final Response.Listener<JSONObject> getDefaultResponseListner() {
 
 		Listener<JSONObject> response = new Response.Listener<JSONObject>() {

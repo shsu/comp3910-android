@@ -11,12 +11,33 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+/**
+ * The Class MyJsonObjectRequest.
+ */
 public class MyJsonObjectRequest extends JsonObjectRequest {
 
+	/** The headers. */
 	private final Map<String, String> headers = new HashMap<String, String>();
 
+	/** The token. */
 	private final String token;
 
+	/**
+	 * Instantiates a new my json object request.
+	 * 
+	 * @param method
+	 *            the method
+	 * @param url
+	 *            the url
+	 * @param jsonRequest
+	 *            the json request
+	 * @param token
+	 *            the token
+	 * @param listener
+	 *            the listener
+	 * @param errorListener
+	 *            the error listener
+	 */
 	public MyJsonObjectRequest(int method, String url, JSONObject jsonRequest,
 			String token, Listener<JSONObject> listener,
 			ErrorListener errorListener) {
@@ -24,6 +45,11 @@ public class MyJsonObjectRequest extends JsonObjectRequest {
 		this.token = token;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.android.volley.Request#getHeaders()
+	 */
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError {
 		Map<String, String> headers = super.getHeaders();

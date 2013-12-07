@@ -24,16 +24,31 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+/**
+ * The Class LoginActivity.
+ */
 public class LoginActivity extends Activity {
 
+	/** The volley request queue. */
 	private RequestQueue volleyRequestQueue;
 
+	/** The token. */
 	private String token;
 
+	/** The m login form view. */
 	private View mLoginFormView;
+
+	/** The m login status view. */
 	private View mLoginStatusView;
+
+	/** The m login status message view. */
 	private TextView mLoginStatusMessageView;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,6 +61,11 @@ public class LoginActivity extends Activity {
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onStop()
+	 */
 	@Override
 	protected void onStop() {
 		if (volleyRequestQueue != null) {
@@ -54,6 +74,12 @@ public class LoginActivity extends Activity {
 		super.onStop();
 	}
 
+	/**
+	 * Attempt login.
+	 * 
+	 * @param view
+	 *            the view
+	 */
 	public void attemptLogin(View view) {
 
 		// Should not be in onCreate because it is blank upon creation.
@@ -88,6 +114,9 @@ public class LoginActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Send login.
+	 */
 	public void sendLogin() {
 		if (token != null && !token.equals("")) {
 			Log.d("in the intent", "in intent");
@@ -97,11 +126,25 @@ public class LoginActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Send register.
+	 * 
+	 * @param view
+	 *            the view
+	 */
 	public void sendRegister(View view) {
 		Intent intent = new Intent(this, Act_Register.class);
 		startActivity(intent);
 	}
 
+	/**
+	 * Login request.
+	 * 
+	 * @param username
+	 *            the username
+	 * @param password
+	 *            the password
+	 */
 	private void loginRequest(String username, String password) {
 
 		String resourceURL = Config_RestServer.REST_SERVER_URL
@@ -137,6 +180,9 @@ public class LoginActivity extends Activity {
 
 	/**
 	 * Shows the progress UI and hides the login form.
+	 * 
+	 * @param show
+	 *            the show
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showProgress(final boolean show) {

@@ -19,17 +19,37 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+/**
+ * The Class Act_Register.
+ */
 public class Act_Register extends Activity {
 
+	/** The et_username. */
 	EditText et_username;
+
+	/** The et_password. */
 	EditText et_password;
+
+	/** The et_confirm_password. */
 	EditText et_confirm_password;
+
+	/** The et_first name. */
 	EditText et_firstName;
+
+	/** The et_last name. */
 	EditText et_lastName;
+
+	/** The et_student id. */
 	EditText et_studentId;
 
+	/** The volley request queue. */
 	private RequestQueue volleyRequestQueue;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,6 +63,11 @@ public class Act_Register extends Activity {
 		et_studentId = (EditText) findViewById(R.id.editText_studentId);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onStop()
+	 */
 	@Override
 	protected void onStop() {
 		if (volleyRequestQueue != null) {
@@ -51,6 +76,11 @@ public class Act_Register extends Activity {
 		super.onStop();
 	}
 
+	/**
+	 * Validate entry.
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean validateEntry() {
 		boolean errorRaised = false;
 
@@ -93,6 +123,12 @@ public class Act_Register extends Activity {
 		return errorRaised;
 	}
 
+	/**
+	 * Send register.
+	 * 
+	 * @param view
+	 *            the view
+	 */
 	public void sendRegister(View view) {
 		if (!validateEntry()) {
 			JSONObject newUser = new JSONObject();
@@ -111,6 +147,12 @@ public class Act_Register extends Activity {
 		}
 	}
 
+	/**
+	 * Register request.
+	 * 
+	 * @param newUser
+	 *            the new user
+	 */
 	private void registerRequest(JSONObject newUser) {
 
 		String resourceURL = Config_RestServer.REST_SERVER_URL

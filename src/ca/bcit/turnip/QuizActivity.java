@@ -28,18 +28,31 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * The Class QuizActivity.
+ */
 public class QuizActivity extends Activity {
 
+	/** The volley request queue. */
 	private RequestQueue volleyRequestQueue;
 
+	/** The token. */
 	private String token;
 
+	/** The questions. */
 	private List<QuizQuestion> questions;
 
+	/** The lv. */
 	private ListView lv;
 	
+	/** The quiz number. */
 	private int quizNumber;
 	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,6 +79,11 @@ public class QuizActivity extends Activity {
 	
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -73,6 +91,11 @@ public class QuizActivity extends Activity {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onStop()
+	 */
 	@Override
 	protected void onStop() {
 		if (volleyRequestQueue != null) {
@@ -81,6 +104,12 @@ public class QuizActivity extends Activity {
 		super.onStop();
 	}
 
+	/**
+	 * Send score.
+	 * 
+	 * @param view
+	 *            the view
+	 */
 	public void sendScore(View view) {
 
 		int score = 0;
@@ -98,6 +127,11 @@ public class QuizActivity extends Activity {
 		startActivity(intent);
 	}
 
+	/**
+	 * Gets the next quiz.
+	 * 
+	 * @return the next quiz
+	 */
 	private void getNextQuiz() {
 		String resourceURL = Config_RestServer.REST_SERVER_URL + "quiz/next";
 
@@ -139,6 +173,9 @@ public class QuizActivity extends Activity {
 		volleyRequestQueue.add(jsonArrayRequest);
 	}
 
+	/**
+	 * Display next quiz.
+	 */
 	protected void displayNextQuiz() {
 		// iterate through and create question elements, 4 choices, link choices to the 
 		Log.d("quiz", questions.toString());

@@ -14,11 +14,27 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import ca.bcit.turnip.domain.QuizQuestion;
 
+/**
+ * The Class QuizAdapter.
+ */
 public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
 
+	/** The questions. */
 	private List<QuizQuestion> questions;
+
+	/** The inflater. */
 	private static LayoutInflater inflater = null;
 
+	/**
+	 * Instantiates a new quiz adapter.
+	 * 
+	 * @param activity
+	 *            the activity
+	 * @param textViewResourceId
+	 *            the text view resource id
+	 * @param _questions
+	 *            the _questions
+	 */
 	public QuizAdapter(Activity activity, int textViewResourceId,
 			List<QuizQuestion> _questions) {
 		super(activity, textViewResourceId, _questions);
@@ -33,16 +49,32 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.ArrayAdapter#getCount()
+	 */
 	@Override
 	public int getCount() {
 		return questions.size();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.ArrayAdapter#getItemId(int)
+	 */
 	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View,
+	 * android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
@@ -130,12 +162,27 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
 		return vi;
 	}
 
+	/**
+	 * The Class MyViewHolder.
+	 */
 	private static class MyViewHolder {
+
+		/** The question_text. */
 		TextView question_text;
+
+		/** The answer_options. */
 		RadioGroup answer_options;
+
+		/** The a. */
 		RadioButton a;
+
+		/** The b. */
 		RadioButton b;
+
+		/** The c. */
 		RadioButton c;
+
+		/** The d. */
 		RadioButton d;
 	}
 

@@ -25,15 +25,34 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.google.gson.Gson;
 
+/**
+ * The Class WelcomeActivity.
+ */
 public class WelcomeActivity extends Activity {
 
+	/** The volley request queue. */
 	private RequestQueue volleyRequestQueue;
+
+	/** The token. */
 	private String token;
+
+	/** The quiz user. */
 	private QuizUser quizUser;
+
+	/** The t_username. */
 	private TextView t_username;
+
+	/** The t_quiz stats. */
 	private TextView t_quizStats;
+
+	/** The quiz average. */
 	private double quizAverage;
 	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,6 +77,11 @@ public class WelcomeActivity extends Activity {
 		setContentView(R.layout.activity_welcome);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -65,6 +89,11 @@ public class WelcomeActivity extends Activity {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
@@ -77,6 +106,11 @@ public class WelcomeActivity extends Activity {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onStop()
+	 */
 	@Override
 	protected void onStop() {
 		if (volleyRequestQueue != null) {
@@ -85,6 +119,11 @@ public class WelcomeActivity extends Activity {
 		super.onStop();
 	}
 
+	/**
+	 * Gets the profile.
+	 * 
+	 * @return the profile
+	 */
 	public void getProfile() {
 		String resourceURL = Config_RestServer.REST_SERVER_URL + "user/profile";
 
@@ -103,6 +142,9 @@ public class WelcomeActivity extends Activity {
 		volleyRequestQueue.add(jsonObjectRequest);
 	}
 
+	/**
+	 * Display profile.
+	 */
 	public void displayProfile() {
 		
 		t_username = (TextView) findViewById(R.id.textView_username_welcome); 
@@ -110,17 +152,30 @@ public class WelcomeActivity extends Activity {
 		
 	}
 
+	/**
+	 * Display quiz average.
+	 */
 	public void displayQuizAverage(){
 		t_quizStats = (TextView) findViewById(R.id.textView_user_average_score);
 		t_quizStats.setText(round() + "%");
 	}
 	
+	/**
+	 * Round.
+	 * 
+	 * @return the string
+	 */
 	private String round() {
 		double x = quizAverage * 100;
 		DecimalFormat twoDForm = new DecimalFormat("#.#");
 		return twoDForm.format(x);
 	}
 
+	/**
+	 * Gets the quiz average.
+	 * 
+	 * @return the quiz average
+	 */
 	public void getQuizAverage() {
 
 		String resourceURL = Config_RestServer.REST_SERVER_URL
@@ -144,12 +199,21 @@ public class WelcomeActivity extends Activity {
 		volleyRequestQueue.add(jsonObjectRequest);
 	}
 
+	/**
+	 * Start next quiz.
+	 * 
+	 * @param view
+	 *            the view
+	 */
 	public void startNextQuiz(View view) {
 		Intent intent = new Intent(this, QuizActivity.class);
 		intent.putExtra("token", token);
 		startActivity(intent);
 	}
 
+	/**
+	 * Logout request.
+	 */
 	private void logoutRequest() {
 		String resourceURL = Config_RestServer.REST_SERVER_URL + "user/logout";
 
