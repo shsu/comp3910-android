@@ -26,7 +26,7 @@ public class ScoreActivity extends Activity {
 	private RequestQueue volleyRequestQueue;
 
 	private String token;
-	
+
 	private TextView t;
 
 	@Override
@@ -46,7 +46,7 @@ public class ScoreActivity extends Activity {
 		sendQuizResult(quizWeek, score, totalPossibleScore);
 
 		setContentView(R.layout.activity_score);
-		
+
 		displayQuizResult(score, totalPossibleScore);
 	}
 
@@ -66,15 +66,20 @@ public class ScoreActivity extends Activity {
 
 	private void displayQuizResult(int score, int totalPossibleScore) {
 		// don't forget to cast if you are getting the percentage.
-		double r = 100 * (double)score / totalPossibleScore;
-		
-		DecimalFormat twoDForm = new DecimalFormat("#.#");
-		String j = twoDForm.format(r);
-		
 		t = (TextView) findViewById(R.id.textView_quiz_score);
+
+		if (totalPossibleScore == 0) {
+	
+			t.setText("0%");
+
+		} else {
 		
-		t.setText(j + "%");
-		
+			double r = 100 * (double) score / totalPossibleScore;
+			DecimalFormat twoDForm = new DecimalFormat("#.#");
+			String j = twoDForm.format(r);
+			t.setText(j + "%");
+		}
+
 	}
 
 	private void sendQuizResult(final int quizWeek, final int score,
@@ -92,7 +97,7 @@ public class ScoreActivity extends Activity {
 				+ quizWeek;
 
 		MyJsonObjectRequest jsonObjectRequest = new MyJsonObjectRequest(
-				Request.Method.POST, resourceURL, results,token,
+				Request.Method.POST, resourceURL, results, token,
 				VolleyHandler.getDefaultResponseListner(),
 				new Response.ErrorListener() {
 
@@ -105,7 +110,4 @@ public class ScoreActivity extends Activity {
 		volleyRequestQueue.add(jsonObjectRequest);
 	}
 
-
-
-	
 }

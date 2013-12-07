@@ -61,7 +61,6 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
 				holder.c = (RadioButton) vi.findViewById(R.id.RadioButton03);
 				holder.d = (RadioButton) vi.findViewById(R.id.RadioButton04);
 
-				
 				vi.setTag(holder);
 
 				holder.answer_options
@@ -70,7 +69,7 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
 							@Override
 							public void onCheckedChanged(RadioGroup group,
 									int checkedId) {
-								// TODO Auto-generated method stub
+								
 								Integer pos = (Integer) group.getTag();
 
 								QuizQuestion question = questions.get(pos);
@@ -116,13 +115,7 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
 		holder.a.setText(questions.get(position).getChoiceA());
 		holder.b.setText(questions.get(position).getChoiceB());
 		holder.c.setText(questions.get(position).getChoiceC());
-		holder.d.setText(questions.get(position).getChoiceD());
-/**		holder.answer_options.addView(holder.a);
-		holder.answer_options.addView(holder.b);
-		holder.answer_options.addView(holder.c);
-		holder.answer_options.addView(holder.d);
-**/
-       
+		holder.d.setText(questions.get(position).getChoiceD());     
 
         if (questions.get(position).getSelectedAnswer() != null) {
             RadioButton r = (RadioButton) holder.answer_options.getChildAt(questions
@@ -132,9 +125,7 @@ public class QuizAdapter extends ArrayAdapter<QuizQuestion> {
             holder.answer_options.clearCheck(); // This is required because although the Model could have the current 
                                        // position to NONE you could be dealing with a previous row where
                                        // the user already picked an answer. 
-
         }
-		
 		
 		return vi;
 	}
